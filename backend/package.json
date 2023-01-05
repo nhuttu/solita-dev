@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc",
     "dev": "ts-node-dev index.ts",
-    "start:prod": "npm ci && npm run tsc && node build/index.js"
+    "start:prod": "npm ci && npm run tsc && node build/index.js",
+    "seed": "node seed.ts"
   },
   "author": "",
   "license": "ISC",

@@ -1,9 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm"
+import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Station {
-    @PrimaryGeneratedColumn()
-    id: number
-    @Column("text")
-    title: string
+  @PrimaryGeneratedColumn()
+  id: number;
+  @Column("text")
+  title: string;
 }
