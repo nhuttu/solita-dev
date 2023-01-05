@@ -1,0 +1,22 @@
+{
+  "name": "solita-dev",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nhuttu/solita-dev.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nhuttu/solita-dev/issues"
+  },
+  "homepage": "https://github.com/nhuttu/solita-dev#readme",
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
