@@ -13,5 +13,19 @@ export interface IJourney {
 
 // FID,ID,Nimi,Namn,Name,Osoite,Adress,Kaupunki,Stad,Operaattor,Kapasiteet,x,y
 
-// TODO: implement IStation
-export interface IStation {}
+export interface IStation {
+  // not sure if FID is necessary.. it shouldn't be
+  FID: number;
+  stationID: number;
+  nameFI: string;
+  nameEN: string;
+  nameSV: string;
+  addressFI: string;
+  addressEN: string;
+  cityFI: string;
+  citySV: string;
+  operator: string;
+  capacity: number;
+  coordinateX: number;
+  coordinateY: number;
+}
