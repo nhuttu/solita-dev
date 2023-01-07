@@ -1,21 +1,7 @@
 // Seeds the database if needed
 import { parse } from "csv-parse";
 import { createReadStream } from "fs";
-import { IJourney, IStation } from "./utils/types";
-
-// Departure,Return,Departure station id,Departure station name,Return station id,Return station name,Covered distance (m),Duration (sec.)
-
-const validateJourneyRow = (line: unknown): line is IJourney => {
-  // TODO: write validation for journey row
-  console.log(line);
-  return true;
-};
-
-const validateStationRow = (line: unknown): line is IStation => {
-  // TODO: write validation for station row
-  console.log(line);
-  return true;
-};
+import { validateJourneyRow, validateStationRow } from "./utils/helpers";
 
 export const seedDatabaseWithJournies = () => {
   // NOTE: hard coding the filename for dev purposes for now

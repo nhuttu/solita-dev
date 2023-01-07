@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity()
+@Entity("station")
 export class StationEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -24,14 +24,14 @@ export class StationEntity {
   @Column()
   nameSV: string;
 
-  @Column()
-  cityFI: string;
+  @Column({ nullable: true })
+  cityFI?: string;
 
-  @Column()
-  citySV: string;
+  @Column({ nullable: true })
+  citySV?: string;
 
-  @Column()
-  operator: string;
+  @Column({ nullable: true })
+  operator?: string;
 
   @Column()
   capacity: number;
