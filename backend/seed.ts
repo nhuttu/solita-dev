@@ -6,17 +6,19 @@ import { IJourney, IStation } from "./utils/types";
 // Departure,Return,Departure station id,Departure station name,Return station id,Return station name,Covered distance (m),Duration (sec.)
 
 const validateJourneyRow = (line: unknown): line is IJourney => {
+  // TODO: write validation for journey row
   console.log(line);
   return true;
 };
 
 const validateStationRow = (line: unknown): line is IStation => {
+  // TODO: write validation for station row
   console.log(line);
   return true;
 };
 
-export const seedJournies = () => {
-  // NOTE: hard coding the filename for dev purposes
+export const seedDatabaseWithJournies = () => {
+  // NOTE: hard coding the filename for dev purposes for now
   // OPTIMAL: fetch the files from bucket (e.g. AWS S3)
   const file = "journies.csv";
 
@@ -30,8 +32,8 @@ export const seedJournies = () => {
     });
 };
 
-export const seedStations = () => {
-  // NOTE: hard coding the filename for dev purposes
+export const seedDatabaseWithStations = () => {
+  // NOTE: hard coding the filename for dev purposes for now
   // OPTIMAL: fetch the files from bucket (e.g. AWS S3)
   const file = "stations.csv";
 

@@ -1,5 +1,5 @@
 import readline from "readline";
-import { seedJournies } from "../seed";
+import { seedDatabaseWithJournies } from "../seed";
 
 export const askUserForSeed = async (question: string) => {
   const rl = readline.createInterface({
@@ -10,7 +10,7 @@ export const askUserForSeed = async (question: string) => {
   return new Promise((resolve) =>
     rl.question(question, (ans) => {
       if (ans === "YES") {
-        seedJournies();
+        seedDatabaseWithJournies();
       } else if (ans === "NO") {
         console.log("Okay, no data is seeded");
       }

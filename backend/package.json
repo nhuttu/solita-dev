@@ -9,7 +9,7 @@
     "tsc": "tsc",
     "dev": "ts-node-dev index.ts",
     "start:prod": "npm ci && npm run tsc && node build/index.js",
-    "seed": "node seed.ts"
+    "seed": "ts-node-dev seed.ts"
   },
   "author": "",
   "license": "ISC",

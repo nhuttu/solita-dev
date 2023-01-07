@@ -1,40 +1,50 @@
 import { AppDataSource } from "../database";
 import { JourneyEntity } from "../entities/journey.entity";
 
-// MISC: I like class based services so I can share the repository across the functions..
-export class JourneyService {
-  private journeyRepository = AppDataSource.getRepository(JourneyEntity);
+const journeyRepository = AppDataSource.getRepository(JourneyEntity);
 
-  public async createJourney() {
-    // TODO: Implement create
-    console.log("Journey create");
-  }
+const createJourney = () => {
+  // TODO: Implement create
+  console.log("Journey create");
+};
 
-  public async updateJourney() {
-    // TODO: Implement update
-    console.log("Journey update");
-  }
+const updateJourney = () => {
+  // TODO: Implement update
+  console.log("Journey update");
+};
 
-  public async deleteJourney() {
-    // TODO: Implement delete
-    console.log("Journey delete");
-  }
+const deleteJourney = async (id: number): Promise<JourneyEntity | null> => {
+  const journeyEntity = await journeyRepository.findOne({ where: { id: id } });
 
-  public async findJourney(id: number): Promise<JourneyEntity | null> {
-    const journeyEntity = await this.journeyRepository.findOne({
-      where: { id: id },
-    });
-
+  if (journeyEntity) {
+    await journeyRepository.delete({ id: id });
+    // Return deleted entity
     return journeyEntity;
   }
 
-  public async findJourneys(page?: number) {
-    // TODO: Implement multi-find
-    const PAGE_AMOUNT = 50;
-    if (page) {
-      // TODO: Query the database between page * PAGE_AMOUNT to page * PAGE_AMOUNT + PAGE_AMOUNT for frontend "infinite" query
-    }
-    // NOTE: if page is not present, perhaps return the first 50 only.
-    console.log("Journeys find");
+  return null;
+};
+
+const findJourney = async (id: number): Promise<JourneyEntity | null> => {
+  const journeyEntity = await journeyRepository.findOne({ where: { id: id } });
+
+  return journeyEntity;
+};
+
+const findJourneys = (page?: number) => {
+  // TODO: Implement multi-find
+  const PAGE_AMOUNT = 50;
+  if (page) {
+    // TODO: Query the database between page * PAGE_AMOUNT to page * PAGE_AMOUNT + PAGE_AMOUNT for frontend "infinite" query
   }
-}
+  // NOTE: if page is not present, perhaps return the first 50 only.
+  console.log("Journeys find");
+};
+
+export default {
+  createJourney,
+  updateJourney,
+  deleteJourney,
+  findJourney,
+  findJourneys,
+};

@@ -25,10 +25,12 @@ export class JourneyEntity {
   @Column()
   return: iso8601;
 
-  @ManyToOne((type) => StationEntity)
+  // MISC: make it explicit that the relation is not eager
+  @ManyToOne((type) => StationEntity, { eager: false })
   departureStation: StationEntity;
 
-  @ManyToOne((type) => StationEntity)
+  // MISC: make it explicit that the relation is not eager
+  @ManyToOne((type) => StationEntity, { eager: false })
   returnStation: StationEntity;
 
   @Column()
