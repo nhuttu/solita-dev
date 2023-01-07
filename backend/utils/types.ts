@@ -1,4 +1,4 @@
-type iso8601 = string;
+export type iso8601 = string;
 
 export interface IJourney {
   departure: iso8601;
@@ -15,7 +15,6 @@ export interface IJourney {
 
 export interface IStation {
   // not sure if FID is necessary.. it shouldn't be
-  FID: number;
   stationID: number;
   nameFI: string;
   nameEN: string;

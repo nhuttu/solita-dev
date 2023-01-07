@@ -1,6 +1,7 @@
 import "reflect-metadata";
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
-import { IJourney } from "../utils/types";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { iso8601 } from "../utils/types";
+import { StationEntity } from "./station.entity";
 
 // export interface IJourney {
 //   departure: iso8601;
@@ -14,27 +15,21 @@ import { IJourney } from "../utils/types";
 // }
 
 @Entity()
-export class Journey implements IJourney {
+export class JourneyEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  departure: string;
+  departure: iso8601;
 
   @Column()
-  return: string;
+  return: iso8601;
 
-  @Column()
-  departureStationID: number;
+  @ManyToOne((type) => StationEntity)
+  departureStation: StationEntity;
 
-  @Column()
-  departureStationName: string;
-
-  @Column()
-  returnStationID: number;
-
-  @Column()
-  returnStationName: string;
+  @ManyToOne((type) => StationEntity)
+  returnStation: StationEntity;
 
   @Column()
   coveredDistance: number;

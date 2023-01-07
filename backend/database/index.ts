@@ -1,11 +1,11 @@
 import { DataSource } from "typeorm";
-import { Journey } from "../entities/journey.entity";
-import { Station } from "../entities/station.entity";
+import { JourneyEntity } from "../entities/journey.entity";
+import { StationEntity } from "../entities/station.entity";
 
 export const AppDataSource = new DataSource({
   type: "sqlite",
   database: "database.db",
-  entities: [Journey, Station],
+  entities: [JourneyEntity, StationEntity],
   synchronize: true,
   logging: false,
 });
