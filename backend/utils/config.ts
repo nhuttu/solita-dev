@@ -1,5 +1,5 @@
 import readline from "readline";
-import { seedDatabaseWithJournies } from "../seed";
+import { seedDatabaseWithJournies } from "./seed";
 
 export const askUserForSeed = async (question: string) => {
   const rl = readline.createInterface({

@@ -6,14 +6,48 @@ const isISO8601 = (iso8601: string) => {
 };
 
 const validateNumberAndLargerThan10 = (index: unknown): index is number => {
-  return typeof index === "number" && !isNaN(index) && index > 10;
+  const num = Number(index);
+  return !isNaN(num) && num > 10;
+};
+
+const validateNumberAndPositive = (index: unknown): index is number => {
+  const num = Number(index);
+  return !isNaN(num) && num > 0;
+};
+
+const validateTextAndNotTooLong = (index: unknown): index is string => {
+  // NOTE: Just my educated guess that the station name shouldn't be longer than this
+  return typeof index === "string" && index.length < 50;
 };
 
 export const validateJourneyRow = (line: unknown): line is IJourney => {
-  // FID,ID,Nimi,Namn,Name,Osoite,Adress,Kaupunki,Stad,Operaattor,Kapasiteet,x,y
-
   // TODO: write validation for journey row
-  console.log(line);
+  if (!Array.isArray(line) || line.length !== 8) return false;
+
+  const departureIsISO8601 = isISO8601(line[0]);
+  if (!departureIsISO8601) return false;
+
+  const returnIsISO8601 = isISO8601(line[1]);
+  if (!returnIsISO8601) return false;
+
+  const validateDepartureStationID = validateNumberAndPositive(line[2]);
+  if (!validateDepartureStationID) return false;
+
+  const validateDepartureName = validateTextAndNotTooLong(line[3]);
+  if (!validateDepartureName) return false;
+
+  const validateReturnStationID = validateNumberAndPositive(line[4]);
+  if (!validateReturnStationID) return false;
+
+  const validateReturnStationName = validateTextAndNotTooLong(line[5]);
+  if (!validateReturnStationName) return false;
+
+  const validateCoveredDistance = validateNumberAndLargerThan10(line[6]);
+  if (!validateCoveredDistance) return false;
+
+  const validateJourneyDuration = validateNumberAndLargerThan10(line[7]);
+  if (!validateJourneyDuration) return false;
+
   return true;
 };
 
@@ -30,6 +64,7 @@ export const validateJourneyRow = (line: unknown): line is IJourney => {
 //   '500'
 // ]
 export const validateStationRow = (line: unknown): line is IStation => {
+  // FID,ID,Nimi,Namn,Name,Osoite,Adress,Kaupunki,Stad,Operaattor,Kapasiteet,x,y
   console.log(line, "STATION");
   return true;
 };
