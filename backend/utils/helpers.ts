@@ -20,8 +20,7 @@ const validateTextAndNotTooLong = (index: unknown): index is string => {
   return typeof index === "string" && index.length < 50;
 };
 
-export const validateJourneyRow = (line: unknown): line is IJourney => {
-  // TODO: write validation for journey row
+export const validateJourneyRow = (line: unknown): boolean => {
   if (!Array.isArray(line) || line.length !== 8) return false;
 
   const departureIsISO8601 = isISO8601(line[0]);
