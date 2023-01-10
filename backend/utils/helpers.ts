@@ -62,7 +62,7 @@ export const validateJourneyRow = (line: unknown): boolean => {
 //   '2043',
 //   '500'
 // ]
-export const validateStationRow = (line: unknown): line is IStation => {
+export const validateStationRow = (line: unknown): boolean => {
   // FID,ID,Nimi,Namn,Name,Osoite,Adress,Kaupunki,Stad,Operaattor,Kapasiteet,x,y
   console.log(line, "STATION");
   return true;
