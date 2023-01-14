@@ -3,7 +3,7 @@ import { JourneyEntity } from "../entities/journey.entity";
 import { StationEntity } from "../entities/station.entity";
 
 export const AppDataSource = new DataSource({
-  type: "sqlite",
+  type: "better-sqlite3",
   database: "database.db",
   entities: [JourneyEntity, StationEntity],
   synchronize: true,
