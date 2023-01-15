@@ -8,8 +8,9 @@ const createJourney = () => {
   console.log("Journey create");
 };
 
-const updateJourney = () => {
+const updateJourney = async (id: number) => {
   // TODO: Implement update
+  const journeyEntity = await journeyRepository.findOne({ where: { id: id } });
   console.log("Journey update");
 };
 
@@ -31,14 +32,17 @@ const findJourney = async (id: number): Promise<JourneyEntity | null> => {
   return journeyEntity;
 };
 
-const findJourneys = (page?: number) => {
-  // TODO: Implement multi-find
+const findJourneysWithPagination = async (pages: number) => {
   const PAGE_AMOUNT = 50;
-  if (page) {
-    // TODO: Query the database between page * PAGE_AMOUNT to page * PAGE_AMOUNT + PAGE_AMOUNT for frontend "infinite" query
-  }
-  // NOTE: if page parameter is not present, perhaps return the first 50 only.
-  console.log("Journeys find");
+  const journeys = await journeyRepository
+    .createQueryBuilder("journey")
+    .skip(PAGE_AMOUNT * pages)
+    .take(PAGE_AMOUNT)
+    .leftJoinAndSelect("journey.returnStation", "returnStation")
+    .leftJoinAndSelect("journey.departureStation", "departureStation")
+    .getMany();
+
+  return journeys;
 };
 
 export default {
@@ -46,5 +50,5 @@ export default {
   updateJourney,
   deleteJourney,
   findJourney,
-  findJourneys,
+  findJourneysWithPagination,
 };
