@@ -4,9 +4,7 @@ export interface IJourney {
   departure: iso8601;
   return: iso8601;
   departureStationID: number;
-  departureStationName: string;
   returnStationID: number;
-  returnStationName: string;
   coveredDistance: number;
   duration: number;
 }
@@ -20,7 +18,7 @@ export interface IStation {
   nameEN: string;
   nameSV: string;
   addressFI: string;
-  addressEN: string;
+  addressSV: string;
   cityFI: string;
   citySV: string;
   operator: string;

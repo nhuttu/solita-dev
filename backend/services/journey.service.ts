@@ -37,7 +37,7 @@ const findJourneys = (page?: number) => {
   if (page) {
     // TODO: Query the database between page * PAGE_AMOUNT to page * PAGE_AMOUNT + PAGE_AMOUNT for frontend "infinite" query
   }
-  // NOTE: if page is not present, perhaps return the first 50 only.
+  // NOTE: if page parameter is not present, perhaps return the first 50 only.
   console.log("Journeys find");
 };
 

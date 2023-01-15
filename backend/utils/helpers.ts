@@ -1,4 +1,6 @@
-import { IJourney, IStation } from "./types";
+import { AppDataSource } from "../database";
+import { JourneyEntity } from "../entities/journey.entity";
+import { StationEntity } from "../entities/station.entity";
 
 const isISO8601 = (iso8601: string) => {
   const iso8601Regex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/;
@@ -20,6 +22,11 @@ const validateTextAndNotTooLong = (index: unknown): index is string => {
   return typeof index === "string" && index.length < 50;
 };
 
+/**
+ * validateJourneyRow checks if the given line is a valid Journey row.
+ * @param {unknown} line - The Journey row to be validated.
+ * @returns {boolean} - Returns true if all the data in the line is valid, false otherwise.
+ */
 export const validateJourneyRow = (line: unknown): boolean => {
   if (!Array.isArray(line) || line.length !== 8) return false;
 
@@ -50,20 +57,61 @@ export const validateJourneyRow = (line: unknown): boolean => {
   return true;
 };
 
-// Departure,Return,Departure station id,Departure station name,Return station id,Return station name,Covered distaindexDuration (sec.)
-
-// [
-//   '2021-05-31T23:57:25',
-//   '2021-06-01T00:05:46',
-//   '094',
-//   'Laajalahden aukio',
-//   '100',
-//   'Teljäntie',
-//   '2043',
-//   '500'
-// ]
+/**
+ * validateStationRow checks if the given line is a valid Station row.
+ * @param {unknown} line - The Station row to be validated.
+ * @returns {boolean} - Returns true if all the data in the line is valid, false otherwise.
+ */
 export const validateStationRow = (line: unknown): boolean => {
+  if (!Array.isArray(line)) return false;
   // FID,ID,Nimi,Namn,Name,Osoite,Adress,Kaupunki,Stad,Operaattor,Kapasiteet,x,y
-  console.log(line, "STATION");
+  const validateStationID = validateNumberAndPositive(line[1]);
+  if (!validateStationID) return false;
+
+  const validateStationNameFI = validateTextAndNotTooLong(line[2]);
+  const validateStationNameSV = validateTextAndNotTooLong(line[3]);
+  const validateStationNameEN = validateTextAndNotTooLong(line[4]);
+
+  if (
+    !validateStationNameEN ||
+    !validateStationNameFI ||
+    !validateStationNameSV
+  )
+    return false;
+  const validateCapacity = validateNumberAndPositive(line[10]);
+  const validateCoordinateX = validateNumberAndPositive(line[11]);
+  const validateCoordinateY = validateNumberAndPositive(line[12]);
+
+  if (!validateCapacity || !validateCoordinateX || !validateCoordinateY)
+    return false;
+
   return true;
+};
+
+export const checkIfStationsSeedIsNeeded = () => {
+  return new Promise(async (resolve) => {
+    try {
+      const stationQuery = await AppDataSource.getRepository(
+        StationEntity
+      ).find({});
+
+      if (stationQuery.length === 0) resolve(true);
+    } catch (e) {
+      resolve(false);
+    }
+  });
+};
+
+export const checkIfJourneySeedIsNeeded = () => {
+  return new Promise(async (resolve) => {
+    try {
+      const journeyQuery = await AppDataSource.getRepository(
+        JourneyEntity
+      ).find({});
+
+      if (journeyQuery.length === 0) resolve(true);
+    } catch (e) {
+      resolve(false);
+    }
+  });
 };
