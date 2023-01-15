@@ -16,13 +16,13 @@ export class StationEntity {
   nameEN: string;
 
   @Column()
-  addressEN: string;
+  nameSV: string;
+
+  @Column()
+  addressSV: string;
 
   @Column()
   addressFI: string;
-
-  @Column()
-  nameSV: string;
 
   @Column({ nullable: true })
   cityFI?: string;
