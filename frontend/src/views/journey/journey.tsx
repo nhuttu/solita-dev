@@ -1,6 +1,6 @@
 import { IJourney } from "../../utils/types";
 
-const Journey = (journey: IJourney) => {
+const Journey = () => {
   return <div>Hello from journey view</div>;
 };
 
