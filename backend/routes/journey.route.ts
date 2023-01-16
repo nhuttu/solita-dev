@@ -38,7 +38,6 @@ router.post("/", async (req, res) => {
     const journey = await journeyService.createJourney(req.body);
     res.status(200).send(journey);
   } catch (e) {
-    console.log(e, "asd");
     res.status(400).send({ error: e.message });
   }
 });
