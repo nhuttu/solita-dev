@@ -1,6 +1,7 @@
 import express from "express";
 
 import journeyService from "../services/journey.service";
+import { validateIJourney } from "../utils/helpers";
 
 const router = express.Router();
 
@@ -31,12 +32,28 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", (req, res) => {
-  res.send("JOURNEYS");
+router.post("/", async (req, res) => {
+  try {
+    validateIJourney(req.body);
+    const journey = await journeyService.createJourney(req.body);
+    res.status(200).send(journey);
+  } catch (e) {
+    console.log(e, "asd");
+    res.status(400).send({ error: e.message });
+  }
 });
 
-router.delete("/:id", (req, res) => {
-  res.send("JOURNEYS");
+router.delete("/:id", async (req, res) => {
+  const id = Number(req.params.id);
+
+  if (isNaN(id)) {
+    res.status(400).send({ error: "ID was not of valid type" });
+  } else {
+    const journey = await journeyService.deleteJourney(id);
+    if (journey) res.status(200).send(journey);
+    else
+      res.status(404).send({ error: `Journey with ID ${id} was not found ` });
+  }
 });
 
 router.put("/:id", (req, res) => {
