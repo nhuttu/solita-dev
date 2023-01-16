@@ -23,12 +23,26 @@ app.use("/journeys", journeysRouter);
 AppDataSource.initialize()
   .then(async () => {
     if (await checkIfStationsSeedIsNeeded()) {
-      await seedDatabaseWithStations("stations.csv");
+      try {
+        await seedDatabaseWithStations("stations.csv");
+      } catch (e) {
+        console.log(
+          e,
+          "Something went wrong with the CSV file stations.csv read"
+        );
+      }
     }
     if (await checkIfJourneySeedIsNeeded()) {
-      await seedDatabaseWithJournies("2021-05.csv");
-      await seedDatabaseWithJournies("2021-06.csv");
-      await seedDatabaseWithJournies("2021-07.csv");
+      try {
+        await seedDatabaseWithJournies("2021-05.csv");
+        await seedDatabaseWithJournies("2021-06.csv");
+        await seedDatabaseWithJournies("2021-07.csv");
+      } catch (e) {
+        console.log(
+          e,
+          "One or more of the journey files was not present in the root directory!"
+        );
+      }
     }
   })
   .catch((error) => console.log(error));
