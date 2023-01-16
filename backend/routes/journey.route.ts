@@ -18,11 +18,28 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  const id = Number(req.params.id);
+
+  if (isNaN(id)) {
+    res.status(400).send({ error: "ID was not of valid type" });
+  } else {
+    const journey = await journeyService.findJourney(id);
+    if (journey) res.status(200).send(journey);
+    else
+      res.status(404).send({ error: `Journey with ID ${id} was not found ` });
+  }
+});
+
 router.post("/", (req, res) => {
   res.send("JOURNEYS");
 });
 
-router.delete("/", (req, res) => {
+router.delete("/:id", (req, res) => {
+  res.send("JOURNEYS");
+});
+
+router.put("/:id", (req, res) => {
   res.send("JOURNEYS");
 });
 
