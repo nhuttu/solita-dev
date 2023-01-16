@@ -11,15 +11,15 @@ router.get("/", async (req, res) => {
 router.get("/:id", (req, res) => {
   const id = Number(req.params.id);
 
-  if (!isNaN(id)) {
+  if (isNaN(id)) {
+    res
+      .status(404)
+      .send({ error: `Parameter provided was not a valid number ` });
+  } else {
     const station = stationService.findStation(id);
     if (station) res.status(200).send(station);
     else
       res.status(404).send({ error: `Station with ID ${id} was not found ` });
-  } else {
-    res
-      .status(404)
-      .send({ error: `Parameter provided was not a valid number ` });
   }
 });
 
