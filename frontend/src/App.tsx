@@ -1,11 +1,13 @@
-import React from 'react';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Journeys from "./views/journeys";
 
 const App = () => {
   return (
-    <div className="text-4xl font-bold">
-      Hello World
-    </div>
+    <Routes>
+      <Route path="/journeys" element={<Journeys />} />
+    </Routes>
   );
-}
+};
 
 export default App;
