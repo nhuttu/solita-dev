@@ -3,6 +3,7 @@ import journeysRouter from "./routes/journey.route";
 import stationsRouter from "./routes/station.route";
 import cors from "cors";
 import { AppDataSource } from "./database";
+import morgan from "morgan";
 import {
   seedDatabaseWithJournies,
   seedDatabaseWithStations,
@@ -16,6 +17,10 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+app.use(
+  morgan(":method :url :status :res[content-length] - :response-time ms")
+);
 
 app.use("/stations", stationsRouter);
 app.use("/journeys", journeysRouter);
