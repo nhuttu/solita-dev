@@ -4,7 +4,7 @@ import { createReadStream } from "fs";
 import { AppDataSource } from "../database";
 import { JourneyEntity } from "../entities/journey.entity";
 import { StationEntity } from "../entities/station.entity";
-import { validateJourneyRow, validateStationRow } from "./helpers";
+import { validateCSVJourneyRow, validateCSVStationRow } from "./helpers";
 
 const assignPropertiesToJourneyEntity = async (
   line: string[]
@@ -34,7 +34,7 @@ export const seedDatabaseWithJournies = (file: string) => {
     createReadStream(file)
       .pipe(parse({ delimiter: ",", from_line: 2 }))
       .on("data", async (row) => {
-        const isValid = validateJourneyRow(row);
+        const isValid = validateCSVJourneyRow(row);
         const journeyEntity = await assignPropertiesToJourneyEntity(row);
         if (isValid && journeyEntity) {
           try {
@@ -66,7 +66,7 @@ export const seedDatabaseWithStations = (file: string) => {
     createReadStream(file)
       .pipe(parse({ delimiter: ",", from_line: 2 }))
       .on("data", async (row) => {
-        const validateRow = validateStationRow(row);
+        const validateRow = validateCSVStationRow(row);
         if (validateRow) {
           const stationEntity = assignPropertiesToStationEntity(row);
 

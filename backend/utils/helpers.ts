@@ -1,6 +1,7 @@
 import { AppDataSource } from "../database";
 import { JourneyEntity } from "../entities/journey.entity";
 import { StationEntity } from "../entities/station.entity";
+import { IJourney } from "./types";
 
 const isISO8601 = (iso8601: string) => {
   const iso8601Regex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/;
@@ -27,7 +28,7 @@ const validateTextAndNotTooLong = (index: unknown): index is string => {
  * @param {unknown} line - The Journey row to be validated.
  * @returns {boolean} - Returns true if all the data in the line is valid, false otherwise.
  */
-export const validateJourneyRow = (line: unknown): boolean => {
+export const validateCSVJourneyRow = (line: unknown): boolean => {
   if (!Array.isArray(line) || line.length !== 8) return false;
 
   const departureIsISO8601 = isISO8601(line[0]);
@@ -62,7 +63,7 @@ export const validateJourneyRow = (line: unknown): boolean => {
  * @param {unknown} line - The Station row to be validated.
  * @returns {boolean} - Returns true if all the data in the line is valid, false otherwise.
  */
-export const validateStationRow = (line: unknown): boolean => {
+export const validateCSVStationRow = (line: unknown): boolean => {
   if (!Array.isArray(line)) return false;
   // FID,ID,Nimi,Namn,Name,Osoite,Adress,Kaupunki,Stad,Operaattor,Kapasiteet,x,y
   const validateStationID = validateNumberAndPositive(line[1]);
@@ -114,4 +115,38 @@ export const checkIfJourneySeedIsNeeded = () => {
       resolve(false);
     }
   });
+};
+
+export const validateIJourney = (obj: unknown): obj is IJourney => {
+  if (typeof obj !== "object" || Object.keys(obj).length !== 6)
+    throw new Error("Value provided was not an object or of correct length!");
+  const journey = obj as IJourney;
+  console.log(journey, "moi");
+  const validateReturnStation = validateNumberAndPositive(
+    journey.returnStationID
+  );
+  if (!validateReturnStation)
+    throw new Error("Invalid return station ID type!");
+
+  const validateDepartureStation = validateNumberAndPositive(
+    journey.departureStationID
+  );
+  if (!validateDepartureStation)
+    throw new Error("Invalid departure station ID type!");
+
+  const validateCoveredDistance = validateNumberAndLargerThan10(
+    journey.coveredDistance
+  );
+  if (!validateCoveredDistance)
+    throw new Error("Invalid covered distance type!");
+
+  const validateDuration = validateNumberAndLargerThan10(journey.duration);
+  if (!validateDuration) throw new Error("Invalid duration type!");
+
+  const validateDeparture = isISO8601(journey.departure);
+  if (!validateDeparture) throw new Error("Invalid departure iso8601!");
+
+  const validateReturn = isISO8601(journey.return);
+  if (!validateReturn) throw new Error("Invalid return iso8601!");
+  return true;
 };
