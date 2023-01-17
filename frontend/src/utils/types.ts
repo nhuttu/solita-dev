@@ -1,18 +1,17 @@
 export type iso8601 = string;
 
 export interface IJourney {
+  id: number;
   departure: iso8601;
   return: iso8601;
-  departureStationID: number;
-  returnStationID: number;
+  departureStation: IStation;
+  returnStation: IStation;
   coveredDistance: number;
   duration: number;
 }
 
-// FID,ID,Nimi,Namn,Name,Osoite,Adress,Kaupunki,Stad,Operaattor,Kapasiteet,x,y
-
 export interface IStation {
-  // not sure if FID is necessary.. it shouldn't be
+  id: number;
   stationID: number;
   nameFI: string;
   nameEN: string;

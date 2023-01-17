@@ -6,7 +6,7 @@ import { validateIJourney } from "../utils/helpers";
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const page = Number(req.query.pages);
+  const page = Number(req.query.page);
   if (isNaN(page)) {
     res
       .status(400)
