@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useInfiniteQuery } from "react-query";
 import { IJourney } from "../../utils/types";
 import JourneyRow from "./journey-row";
+import JourneyTable from "./journey-table";
 
 const Journeys = () => {
   const [page, setPage] = useState(0);
@@ -76,21 +77,7 @@ const Journeys = () => {
             : "Nothing more to load"}
         </button>
       </div>
-      <table className="flex flex-col">
-        <tbody>
-          <tr>
-            <th>Departure</th>
-            <th>Return</th>
-            <th>Departure station ID</th>
-            <th>Return station ID</th>
-            <th>Covered distance</th>
-            <th>Duration</th>
-          </tr>
-          {journeys.map((i) => (
-            <JourneyRow {...i} key={i.id} />
-          ))}
-        </tbody>
-      </table>
+      <JourneyTable journeys={journeys} />
       <div>{isFetching && !isFetchingNextPage ? "Fetching..." : null}</div>
     </>
   );
