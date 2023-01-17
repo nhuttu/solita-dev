@@ -63,12 +63,12 @@ const findJourney = async (id: number): Promise<JourneyEntity> | null => {
 };
 
 const findJourneysWithPagination = async (
-  pages: number
+  page: number
 ): Promise<JourneyEntity[]> => {
   const PAGE_AMOUNT = 50;
   const journeys = await journeyRepository
     .createQueryBuilder("journey")
-    .skip(PAGE_AMOUNT * pages)
+    .skip(PAGE_AMOUNT * page)
     .take(PAGE_AMOUNT)
     .leftJoinAndSelect("journey.returnStation", "returnStation")
     .leftJoinAndSelect("journey.departureStation", "departureStation")

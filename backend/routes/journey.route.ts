@@ -6,14 +6,14 @@ import { validateIJourney } from "../utils/helpers";
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const pages = Number(req.query.pages);
-  if (isNaN(pages)) {
+  const page = Number(req.query.pages);
+  if (isNaN(page)) {
     res
       .status(400)
       .send({ error: "Pages was not provided or it was incorrect" });
   } else {
     const journeyEntries = await journeyService.findJourneysWithPagination(
-      pages
+      page
     );
     res.status(200).send(journeyEntries);
   }
