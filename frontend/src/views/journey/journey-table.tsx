@@ -4,15 +4,15 @@ import JourneyRow from "./journey-row";
 
 const JourneyTable = (props: { journeys: IJourney[] }) => {
   return (
-    <table className="flex flex-col">
+    <table className="table-auto border-collapse">
       <tbody>
         <tr>
-          <th>Departure</th>
-          <th>Return</th>
-          <th>Departure station ID</th>
-          <th>Return station ID</th>
-          <th>Covered distance</th>
-          <th>Duration</th>
+          <th className="px-4 py-2 text-left">Departure</th>
+          <th className="px-4 py-2 text-left">Return</th>
+          <th className="px-4 py-2 text-left">Departure station</th>
+          <th className="px-4 py-2 text-left">Return station </th>
+          <th className="px-4 py-2 text-left">Covered distance</th>
+          <th className="px-4 py-2 text-left">Duration</th>
         </tr>
         {props.journeys.map((i) => (
           <JourneyRow {...i} key={i.id} />

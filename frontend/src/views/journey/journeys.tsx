@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useInfiniteQuery } from "react-query";
+import { fetchJourneys } from "../../services/journey.service";
 import { IJourney } from "../../utils/types";
 import JourneyRow from "./journey-row";
 import JourneyTable from "./journey-table";
@@ -9,12 +10,15 @@ const Journeys = () => {
   const [page, setPage] = useState(0);
   const [journeys, setJourneys] = useState<IJourney[]>([]);
 
-  const fetchJourneys = async ({ pageParam = 0 }) => {
-    const response = await axios.get(
-      `http://localhost:3000/journeys?page=${pageParam}`
-    );
-    setJourneys(response.data);
-    return response.data;
+  const journeyQueryFn = async ({ pageParam = 0 }) => {
+    try {
+      const response = await fetchJourneys(pageParam);
+
+      setJourneys(response);
+      return response;
+    } catch (e) {
+      console.log(e, "Something went wrong with the fetch");
+    }
   };
 
   const {
@@ -29,7 +33,7 @@ const Journeys = () => {
     isPreviousData,
   } = useInfiniteQuery<IJourney[], Error>({
     queryKey: ["journeys"],
-    queryFn: fetchJourneys,
+    queryFn: journeyQueryFn,
     getNextPageParam: (currentPage) => {
       return currentPage.length === 50 && page + 1;
     },

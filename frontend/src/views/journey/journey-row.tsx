@@ -4,12 +4,12 @@ const JourneyRow = (props: IJourney) => {
   return (
     <>
       <tr>
-        <td>{props.return}</td>
-        <td>{props.departure}</td>
-        <td>{props.returnStation.nameFI}</td>
-        <td>{props.departureStation.nameFI}</td>
-        <td>{props.coveredDistance}</td>
-        <td>{props.duration}</td>
+        <td className="border px-4 py-2">{props.return}</td>
+        <td className="border px-4 py-2">{props.departure}</td>
+        <td className="border px-4 py-2">{props.returnStation.nameFI}</td>
+        <td className="border px-4 py-2">{props.departureStation.nameFI}</td>
+        <td className="border px-4 py-2">{props.coveredDistance}</td>
+        <td className="border px-4 py-2">{props.duration}</td>
       </tr>
     </>
   );
