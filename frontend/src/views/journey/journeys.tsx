@@ -6,13 +6,13 @@ import JourneyRow from "./journey-row";
 
 const Journeys = () => {
   const [page, setPage] = useState(0);
-  const [pages, setPages] = useState<IJourney[]>([]);
+  const [journeys, setJourneys] = useState<IJourney[]>([]);
 
   const fetchJourneys = async ({ pageParam = 0 }) => {
     const response = await axios.get(
       `http://localhost:3000/journeys?page=${pageParam}`
     );
-    setPages(response.data);
+    setJourneys(response.data);
     return response.data;
   };
 
@@ -23,17 +23,28 @@ const Journeys = () => {
     isFetching,
     isFetchingNextPage,
     status,
+    hasPreviousPage,
+    fetchPreviousPage,
+    isPreviousData,
   } = useInfiniteQuery<IJourney[], Error>({
     queryKey: ["journeys"],
     queryFn: fetchJourneys,
     getNextPageParam: (currentPage) => {
       return currentPage.length === 50 && page + 1;
     },
+    getPreviousPageParam: (currentPage) => {
+      return page !== 0 ? page - 1 : undefined;
+    },
   });
 
   const handleNextPageClick = () => {
     setPage((prev) => prev + 1);
     fetchNextPage();
+  };
+
+  const handlePreviousPageClick = () => {
+    setPage((prev) => prev - 1);
+    fetchPreviousPage();
   };
 
   return (
@@ -54,19 +65,31 @@ const Journeys = () => {
             ? "Load More"
             : "Nothing more to load"}
         </button>
+        <button
+          onClick={() => handlePreviousPageClick()}
+          disabled={!hasPreviousPage || isFetchingNextPage}
+        >
+          {isFetchingNextPage
+            ? "Loading more..."
+            : hasNextPage
+            ? "Load previous"
+            : "Nothing more to load"}
+        </button>
       </div>
       <table className="flex flex-col">
-        <tr>
-          <th>Departure</th>
-          <th>Return</th>
-          <th>Departure station ID</th>
-          <th>Return station ID</th>
-          <th>Covered distance</th>
-          <th>Duration</th>
-        </tr>
-        {pages.map((i) => (
-          <JourneyRow {...i} key={i.id} />
-        ))}
+        <tbody>
+          <tr>
+            <th>Departure</th>
+            <th>Return</th>
+            <th>Departure station ID</th>
+            <th>Return station ID</th>
+            <th>Covered distance</th>
+            <th>Duration</th>
+          </tr>
+          {journeys.map((i) => (
+            <JourneyRow {...i} key={i.id} />
+          ))}
+        </tbody>
       </table>
       <div>{isFetching && !isFetchingNextPage ? "Fetching..." : null}</div>
     </>
