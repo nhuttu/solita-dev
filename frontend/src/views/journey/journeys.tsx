@@ -1,9 +1,7 @@
-import axios from "axios";
 import { useState } from "react";
 import { useInfiniteQuery } from "react-query";
-import { fetchJourneys } from "../../services/journey.service";
+import { fetch50Journeys } from "../../services/journey.service";
 import { IJourney } from "../../utils/types";
-import JourneyRow from "./journey-row";
 import JourneyTable from "./journey-table";
 
 const Journeys = () => {
@@ -12,7 +10,7 @@ const Journeys = () => {
 
   const journeyQueryFn = async ({ pageParam = 0 }) => {
     try {
-      const response = await fetchJourneys(pageParam);
+      const response = await fetch50Journeys(pageParam);
 
       setJourneys(response);
       return response;
@@ -30,14 +28,13 @@ const Journeys = () => {
     status,
     hasPreviousPage,
     fetchPreviousPage,
-    isPreviousData,
   } = useInfiniteQuery<IJourney[], Error>({
     queryKey: ["journeys"],
     queryFn: journeyQueryFn,
     getNextPageParam: (currentPage) => {
       return currentPage.length === 50 && page + 1;
     },
-    getPreviousPageParam: (currentPage) => {
+    getPreviousPageParam: () => {
       return page !== 0 ? page - 1 : undefined;
     },
   });
@@ -54,31 +51,37 @@ const Journeys = () => {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <div>
+      <div className="flex items-center justify-center gap-4">
         {status === "loading" ? (
           <p>Loading...</p>
         ) : status === "error" ? (
           <span>Error: {error.message}</span>
         ) : null}
         <button
-          onClick={() => handleNextPageClick()}
-          disabled={!hasNextPage || isFetchingNextPage}
-        >
-          {isFetchingNextPage
-            ? "Loading more..."
-            : hasNextPage
-            ? "Load More"
-            : "Nothing more to load"}
-        </button>
-        <button
+          className="flex h-max w-20 items-center justify-center rounded border-2 border-black"
           onClick={() => handlePreviousPageClick()}
           disabled={!hasPreviousPage || isFetchingNextPage}
         >
-          {isFetchingNextPage
-            ? "Loading more..."
-            : hasNextPage
-            ? "Load previous"
-            : "Nothing more to load"}
+          {isFetchingNextPage ? (
+            "Loading more..."
+          ) : hasNextPage ? (
+            <img src="arrow-left.svg" />
+          ) : (
+            "Nothing more to load"
+          )}
+        </button>
+        <button
+          className="flex h-max w-20 items-center justify-center rounded border-2 border-black"
+          onClick={() => handleNextPageClick()}
+          disabled={!hasNextPage || isFetchingNextPage}
+        >
+          {isFetchingNextPage ? (
+            "Loading more..."
+          ) : hasNextPage ? (
+            <img src="arrow-right.svg" />
+          ) : (
+            "Nothing more to load"
+          )}
         </button>
       </div>
       <JourneyTable journeys={journeys} />
