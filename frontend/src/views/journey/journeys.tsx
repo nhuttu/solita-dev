@@ -53,7 +53,7 @@ const Journeys = () => {
   };
 
   return (
-    <>
+    <div className="flex flex-col items-center justify-center">
       <div>
         {status === "loading" ? (
           <p>Loading...</p>
@@ -83,7 +83,7 @@ const Journeys = () => {
       </div>
       <JourneyTable journeys={journeys} />
       <div>{isFetching && !isFetchingNextPage ? "Fetching..." : null}</div>
-    </>
+    </div>
   );
 };
 export default Journeys;

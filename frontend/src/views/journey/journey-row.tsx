@@ -1,15 +1,30 @@
+import { Link } from "react-router-dom";
 import { IJourney } from "../../utils/types";
 
-const JourneyRow = (props: IJourney) => {
+interface JourneyProps {
+  journey: IJourney;
+}
+
+const JourneyRow: React.FC<JourneyProps> = ({ journey }) => {
   return (
     <>
       <tr>
-        <td className="border px-4 py-2">{props.return}</td>
-        <td className="border px-4 py-2">{props.departure}</td>
-        <td className="border px-4 py-2">{props.returnStation.nameFI}</td>
-        <td className="border px-4 py-2">{props.departureStation.nameFI}</td>
-        <td className="border px-4 py-2">{props.coveredDistance}</td>
-        <td className="border px-4 py-2">{props.duration}</td>
+        <td className="border px-4 py-2">
+          <Link to={`/stations/${journey.returnStation.id}`}>
+            {journey.returnStation.nameFI}
+          </Link>
+        </td>
+        <td className="border px-4 py-2">
+          <Link to={`/stations/${journey.departureStation.id}`}>
+            {journey.departureStation.nameFI}
+          </Link>
+        </td>
+        <td className="border px-4 py-2">
+          {(journey.coveredDistance / 1000).toFixed(2)}
+        </td>
+        <td className="border px-4 py-2">
+          {(journey.duration / 60).toFixed(2)}
+        </td>
       </tr>
     </>
   );
