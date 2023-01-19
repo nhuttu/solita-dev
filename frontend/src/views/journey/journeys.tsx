@@ -50,7 +50,7 @@ const Journeys = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex min-h-full flex-col items-center justify-center">
       <div className="flex items-center justify-center gap-4">
         {status === "loading" ? (
           <p>Loading...</p>

@@ -18,9 +18,9 @@ export interface IStation {
   nameSV: string;
   addressFI: string;
   addressSV: string;
-  cityFI: string;
-  citySV: string;
-  operator: string;
+  cityFI?: string;
+  citySV?: string;
+  operator?: string;
   capacity: number;
   coordinateX: number;
   coordinateY: number;

@@ -9,6 +9,7 @@ const JourneyRow: React.FC<JourneyProps> = ({ journey }) => {
   return (
     <>
       <tr>
+        <td className="border px-4 py-2">{journey.id}</td>
         <td className="border px-4 py-2">
           <Link to={`/station/${journey.returnStation.id}`}>
             {journey.returnStation.nameFI}
