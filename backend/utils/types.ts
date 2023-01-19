@@ -12,16 +12,15 @@ export interface IJourney {
 // FID,ID,Nimi,Namn,Name,Osoite,Adress,Kaupunki,Stad,Operaattor,Kapasiteet,x,y
 
 export interface IStation {
-  // not sure if FID is necessary.. it shouldn't be
   stationID: number;
   nameFI: string;
   nameEN: string;
   nameSV: string;
   addressFI: string;
   addressSV: string;
-  cityFI: string;
-  citySV: string;
-  operator: string;
+  cityFI?: string;
+  citySV?: string;
+  operator?: string;
   capacity: number;
   coordinateX: number;
   coordinateY: number;

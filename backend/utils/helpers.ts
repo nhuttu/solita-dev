@@ -121,7 +121,7 @@ export const validateIJourney = (obj: unknown): obj is IJourney => {
   if (typeof obj !== "object" || Object.keys(obj).length !== 6)
     throw new Error("Value provided was not an object or of correct length!");
   const journey = obj as IJourney;
-  console.log(journey, "moi");
+
   const validateReturnStation = validateNumberAndPositive(
     journey.returnStationID
   );

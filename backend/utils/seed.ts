@@ -100,10 +100,10 @@ const assignPropertiesToStationEntity = (line: string[]) => {
   stationEntity.addressFI = line[5];
   stationEntity.addressSV = line[6];
 
-  stationEntity.cityFI = line[7];
-  stationEntity.citySV = line[8];
+  stationEntity.cityFI = line[7].trim() === "" ? null : line[7];
+  stationEntity.citySV = line[8].trim() === "" ? null : line[8];
 
-  stationEntity.operator = line[9];
+  stationEntity.operator = line[9].trim() === "" ? null : line[9];
   stationEntity.capacity = Number(line[10]);
   stationEntity.coordinateX = Number(line[11]);
   stationEntity.coordinateY = Number(line[12]);
