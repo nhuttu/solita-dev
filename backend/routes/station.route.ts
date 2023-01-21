@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
   res.status(200).send(stations);
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", async (req, res) => {
   const id = Number(req.params.id);
 
   if (isNaN(id)) {
@@ -16,7 +16,8 @@ router.get("/:id", (req, res) => {
       .status(404)
       .send({ error: `Parameter provided was not a valid number ` });
   } else {
-    const station = stationService.findStation(id);
+    const station = await stationService.findStation(id);
+    console.log(station);
     if (station) res.status(200).send(station);
     else
       res.status(404).send({ error: `Station with ID ${id} was not found ` });

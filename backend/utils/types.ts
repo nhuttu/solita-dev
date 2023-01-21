@@ -24,4 +24,6 @@ export interface IStation {
   capacity: number;
   coordinateX: number;
   coordinateY: number;
+  journeysStarted?: number;
+  journeysEnded?: number;
 }
