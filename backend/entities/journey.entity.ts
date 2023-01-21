@@ -15,12 +15,12 @@ export class JourneyEntity {
   return: iso8601;
 
   // NOTE: make it explicit that the relation is not eager
-  @ManyToOne((type) => StationEntity, { eager: false })
-  departureStation: StationEntity;
+  @ManyToOne((type) => StationEntity, { eager: false, nullable: true })
+  departureStation?: StationEntity;
 
   // NOTE: make it explicit that the relation is not eager
-  @ManyToOne((type) => StationEntity, { eager: false })
-  returnStation: StationEntity;
+  @ManyToOne((type) => StationEntity, { eager: false, nullable: true })
+  returnStation?: StationEntity;
 
   @Column()
   coveredDistance: number;

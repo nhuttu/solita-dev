@@ -19,7 +19,7 @@ export const seedDatabaseWithJournies = (file: string) => {
         const journeyEntity =
           isValid && (await assignPropertiesToJourneyEntity(row));
         if (isValid && journeyEntity) {
-          console.log("tapahtuuko???");
+          validCount++;
           try {
             await AppDataSource.query(
               "INSERT INTO journey (departure, return, coveredDistance, duration, returnStationId, departureStationId) VALUES (?, ?, ?, ?, ?, ?)",
@@ -28,8 +28,8 @@ export const seedDatabaseWithJournies = (file: string) => {
                 journeyEntity.return,
                 journeyEntity.coveredDistance,
                 journeyEntity.duration,
-                journeyEntity.returnStation.id,
-                journeyEntity.departureStation.id,
+                journeyEntity.returnStation?.id,
+                journeyEntity.departureStation?.id,
               ]
             );
           } catch (e) {
@@ -41,20 +41,20 @@ export const seedDatabaseWithJournies = (file: string) => {
         if (validCount) {
           resolve(true);
           console.log(`Journey CSV ${file}  successfully processed`);
-        } else {
-          resolve(false);
-        }
+        } else resolve(false);
       });
   });
 };
 
 export const seedDatabaseWithStations = (file: string) => {
+  let validCount = 0;
   return new Promise((resolve) => {
     createReadStream(file)
       .pipe(parse({ delimiter: ",", from_line: 2 }))
       .on("data", async (row) => {
         const validateRow = validateCSVStationRow(row);
         if (validateRow) {
+          validCount++;
           const stationEntity = assignPropertiesToStationEntity(row);
 
           try {
@@ -69,8 +69,10 @@ export const seedDatabaseWithStations = (file: string) => {
       })
 
       .on("end", () => {
-        console.log(`Station CSV ${file}  successfully processed`);
-        resolve(true);
+        if (validCount) {
+          console.log(`Station CSV ${file}  successfully processed`);
+          resolve(true);
+        } else resolve(false);
       });
   });
 };

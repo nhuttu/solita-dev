@@ -54,7 +54,7 @@ export const validateCSVJourneyRow = (line: unknown): boolean => {
 
   const validateJourneyDuration = validateNumberAndLargerThan10(line[7]);
   if (!validateJourneyDuration) return false;
-  console.log(line, "taas");
+
   return true;
 };
 
@@ -162,7 +162,6 @@ export const assignPropertiesToJourneyEntity = async (
   const returnStation = await stationRepository.findOne({
     where: { stationID: Number(line[4]) },
   });
-  if (!departureStation || !returnStation) return null;
 
   const newJourney = new JourneyEntity();
   newJourney.departure = line[0];
