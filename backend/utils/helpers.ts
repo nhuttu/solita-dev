@@ -54,7 +54,7 @@ export const validateCSVJourneyRow = (line: unknown): boolean => {
 
   const validateJourneyDuration = validateNumberAndLargerThan10(line[7]);
   if (!validateJourneyDuration) return false;
-
+  console.log(line, "taas");
   return true;
 };
 
@@ -149,4 +149,50 @@ export const validateIJourney = (obj: unknown): obj is IJourney => {
   const validateReturn = isISO8601(journey.return);
   if (!validateReturn) throw new Error("Invalid return iso8601!");
   return true;
+};
+
+export const assignPropertiesToJourneyEntity = async (
+  line: string[]
+): Promise<JourneyEntity> => {
+  const stationRepository = AppDataSource.getRepository(StationEntity);
+
+  const departureStation = await stationRepository.findOne({
+    where: { stationID: Number(line[2]) },
+  });
+  const returnStation = await stationRepository.findOne({
+    where: { stationID: Number(line[4]) },
+  });
+  if (!departureStation || !returnStation) return null;
+
+  const newJourney = new JourneyEntity();
+  newJourney.departure = line[0];
+  newJourney.return = line[1];
+  newJourney.coveredDistance = Number(line[6]);
+  newJourney.duration = Number(line[7]);
+  newJourney.departureStation = departureStation;
+  newJourney.returnStation = returnStation;
+
+  return newJourney;
+};
+
+export const assignPropertiesToStationEntity = (line: string[]) => {
+  const stationEntity = new StationEntity();
+  stationEntity.stationID = Number(line[1]);
+
+  stationEntity.nameFI = line[2];
+  stationEntity.nameSV = line[3];
+  stationEntity.nameEN = line[4];
+
+  stationEntity.addressFI = line[5];
+  stationEntity.addressSV = line[6];
+
+  stationEntity.cityFI = line[7].trim() === "" ? null : line[7];
+  stationEntity.citySV = line[8].trim() === "" ? null : line[8];
+
+  stationEntity.operator = line[9].trim() === "" ? null : line[9];
+  stationEntity.capacity = Number(line[10]);
+  stationEntity.coordinateX = Number(line[11]);
+  stationEntity.coordinateY = Number(line[12]);
+
+  return stationEntity;
 };

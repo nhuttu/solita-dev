@@ -1,6 +1,7 @@
 import express from "express";
 import journeysRouter from "./routes/journey.route";
 import stationsRouter from "./routes/station.route";
+import filesRouter from "./routes/file.route";
 import cors from "cors";
 import { AppDataSource } from "./database";
 import morgan from "morgan";
@@ -24,6 +25,7 @@ app.use(
 
 app.use("/stations", stationsRouter);
 app.use("/journeys", journeysRouter);
+app.use("/upload", filesRouter);
 
 AppDataSource.initialize()
   .then(async () => {
@@ -39,9 +41,9 @@ AppDataSource.initialize()
     }
     if (await checkIfJourneySeedIsNeeded()) {
       try {
-        await seedDatabaseWithJournies("2021-05.csv");
-        await seedDatabaseWithJournies("2021-06.csv");
-        await seedDatabaseWithJournies("2021-07.csv");
+        // await seedDatabaseWithJournies("2021-05.csv");
+        // await seedDatabaseWithJournies("2021-06.csv");
+        // await seedDatabaseWithJournies("2021-07.csv");
       } catch (e) {
         console.log(
           e,
