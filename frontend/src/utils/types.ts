@@ -4,8 +4,8 @@ export interface IJourney {
   id: number;
   departure: iso8601;
   return: iso8601;
-  departureStation: IStation;
-  returnStation: IStation;
+  departureStation?: IStation;
+  returnStation?: IStation;
   coveredDistance: number;
   duration: number;
 }
@@ -24,4 +24,6 @@ export interface IStation {
   capacity: number;
   coordinateX: number;
   coordinateY: number;
+  journeysStarted?: number;
+  journeysEnded?: number;
 }

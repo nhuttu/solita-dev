@@ -9,8 +9,12 @@ const StationRow: React.FC<StationProps> = ({ station }) => {
   return (
     <>
       <tr>
-        <td className="border px-4 py-2">{station.nameFI}</td>
-        <td className="border px-4 py-2">{station.nameSV}</td>
+        <td className="border px-4 py-2 underline ">
+          <Link to={`/station/${station.id}`}>{station.nameFI}</Link>
+        </td>
+        <td className="border px-4 py-2 underline">
+          <Link to={`/station/${station.id}`}>{station.nameSV}</Link>
+        </td>
         <td className="border px-4 py-2">{station.cityFI}</td>
         <td className="border px-4 py-2">{station.citySV}</td>
         <td className="border px-4 py-2">{station.operator}</td>
