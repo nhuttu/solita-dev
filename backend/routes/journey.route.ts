@@ -7,8 +7,9 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   const page = Number(req.query.page);
-  const returnFilter = typeof req.query.return === "string" && req.query.return;
-  const departureFilter =
+  const returnFilter: string | undefined =
+    typeof req.query.return === "string" && req.query.return;
+  const departureFilter: string | undefined =
     typeof req.query.departure === "string" && req.query.departure;
 
   if (isNaN(page)) {
