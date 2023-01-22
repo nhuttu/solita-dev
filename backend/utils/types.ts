@@ -1,6 +1,9 @@
+import { JourneyEntity } from "../entities/journey.entity";
+import { StationEntity } from "../entities/station.entity";
+
 export type iso8601 = string;
 
-export interface IJourney {
+export interface IJourney extends JourneyEntity {
   departure: iso8601;
   return: iso8601;
   departureStationID: number;
@@ -11,7 +14,8 @@ export interface IJourney {
 
 // FID,ID,Nimi,Namn,Name,Osoite,Adress,Kaupunki,Stad,Operaattor,Kapasiteet,x,y
 
-export interface IStation {
+export interface IStation extends StationEntity {
+  id: number;
   stationID: number;
   nameFI: string;
   nameEN: string;
@@ -26,4 +30,6 @@ export interface IStation {
   coordinateY: number;
   journeysStarted?: number;
   journeysEnded?: number;
+  popularReturns?: IStation[];
+  popularDepartures?: IStation[];
 }

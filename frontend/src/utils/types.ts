@@ -26,4 +26,6 @@ export interface IStation {
   coordinateY: number;
   journeysStarted?: number;
   journeysEnded?: number;
+  popularReturns?: IStation[];
+  popularDepartures?: IStation[];
 }

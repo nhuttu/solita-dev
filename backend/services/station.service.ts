@@ -29,6 +29,45 @@ const findStation = async (id: number): Promise<StationEntity> | null => {
   return station;
 };
 
+const findPopularDepartureStationsForStation = async (
+  id: number
+): Promise<StationEntity[]> => {
+  const result = await journeyRepository.query(
+    `SELECT departure_station.*
+    FROM journey
+    LEFT JOIN station as departure_station ON journey.departureStationId = departure_station.id
+    WHERE journey.returnStationId = ?
+    GROUP BY journey.departureStationId
+    ORDER BY COUNT(journey.id) DESC
+    LIMIT 5`,
+    [id]
+  );
+
+  return result;
+};
+
+const findPopularReturnStationsForStation = async (
+  id: number
+): Promise<StationEntity[]> => {
+  const result = await journeyRepository.query(
+    `SELECT return_station.*
+    FROM journey
+    LEFT JOIN station as return_station ON journey.returnStationId = return_station.id
+    WHERE journey.departureStationId = ?
+    GROUP BY journey.returnStationId
+    ORDER BY COUNT(journey.id) DESC
+    LIMIT 5`,
+    [id]
+  );
+
+  return result;
+};
+
 // NOTE: Updating, deleting or creating stations are forbidden for now
 
-export default { findStation, findStations };
+export default {
+  findStation,
+  findStations,
+  findPopularDepartureStationsForStation,
+  findPopularReturnStationsForStation,
+};

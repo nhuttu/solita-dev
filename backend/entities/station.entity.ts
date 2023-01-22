@@ -37,10 +37,10 @@ export class StationEntity {
   capacity: number;
 
   @Column({ nullable: true })
-  journeysStarted: number;
+  journeysStarted?: number;
 
   @Column({ nullable: true })
-  journeysEnded: number;
+  journeysEnded?: number;
 
   @Column({ type: "decimal", precision: 10 })
   coordinateX: number;
