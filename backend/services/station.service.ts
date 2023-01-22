@@ -1,7 +1,6 @@
 import { AppDataSource } from "../database";
 import { JourneyEntity } from "../entities/journey.entity";
 import { StationEntity } from "../entities/station.entity";
-import { IStation } from "../utils/types";
 
 const stationRepository = AppDataSource.getRepository(StationEntity);
 const journeyRepository = AppDataSource.getRepository(JourneyEntity);

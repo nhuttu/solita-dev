@@ -7,13 +7,19 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   const page = Number(req.query.page);
+  const returnFilter = typeof req.query.return === "string" && req.query.return;
+  const departureFilter =
+    typeof req.query.departure === "string" && req.query.departure;
+
   if (isNaN(page)) {
     res
       .status(400)
       .send({ error: "Pages was not provided or it was incorrect" });
   } else {
     const journeyEntries = await journeyService.findJourneysWithPagination(
-      page
+      page,
+      returnFilter,
+      departureFilter
     );
     res.status(200).send(journeyEntries);
   }

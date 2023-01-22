@@ -63,17 +63,26 @@ const findJourney = async (id: number): Promise<JourneyEntity> | null => {
 };
 
 const findJourneysWithPagination = async (
-  page: number
+  page: number,
+  returnFilter?: string,
+  departureFilter?: string
 ): Promise<JourneyEntity[]> => {
   const PAGE_AMOUNT = 50;
+  console.log(returnFilter, departureFilter);
   const journeys = await journeyRepository
     .createQueryBuilder("journey")
     .skip(PAGE_AMOUNT * page)
     .take(PAGE_AMOUNT)
     .leftJoinAndSelect("journey.returnStation", "returnStation")
     .leftJoinAndSelect("journey.departureStation", "departureStation")
+    .where("departureStation.nameFI LIKE :departure", {
+      departure: `%${departureFilter}%`,
+    })
+    .andWhere("returnStation.nameFI LIKE :return", {
+      return: `%${returnFilter}%`,
+    })
     .getMany();
-
+  console.log(journeys);
   return journeys;
 };
 

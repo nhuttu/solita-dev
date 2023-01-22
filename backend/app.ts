@@ -5,10 +5,7 @@ import filesRouter from "./routes/file.route";
 import cors from "cors";
 import { AppDataSource } from "./database";
 import morgan from "morgan";
-import {
-  seedDatabaseWithJournies,
-  seedDatabaseWithStations,
-} from "./utils/seed";
+import { seedDatabaseWithStations } from "./utils/seed";
 import {
   checkIfStationsSeedIsNeeded,
   checkIfJourneySeedIsNeeded,
