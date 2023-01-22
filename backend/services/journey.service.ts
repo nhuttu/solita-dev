@@ -68,7 +68,7 @@ const findJourneysWithPagination = async (
   departureFilter?: string
 ): Promise<JourneyEntity[]> => {
   const PAGE_AMOUNT = 50;
-  console.log(returnFilter, departureFilter);
+
   const journeys = await journeyRepository
     .createQueryBuilder("journey")
     .skip(PAGE_AMOUNT * page)
@@ -82,7 +82,7 @@ const findJourneysWithPagination = async (
       return: `%${returnFilter}%`,
     })
     .getMany();
-  console.log(journeys);
+
   return journeys;
 };
 
