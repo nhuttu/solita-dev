@@ -116,7 +116,7 @@ const Journeys = () => {
         />
         Departure station name filter
       </div>
-      {journeys.length >= 0 && status === "success" ? (
+      {journeys.length > 0 && status === "success" ? (
         <JourneyTable journeys={journeys} />
       ) : (
         <button
