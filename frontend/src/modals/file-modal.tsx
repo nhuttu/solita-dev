@@ -47,8 +47,11 @@ const FileModal: React.FC<FileModalProps> = ({ setModalOpen }) => {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-900 opacity-50 ">
-      <div className=" z-50 flex flex-col items-center justify-center gap-5 rounded-lg bg-white p-6 shadow-lg">
+    <div
+      className=" fixed top-0 left-0 right-0 bottom-0 z-10 flex items-center justify-center"
+      style={{ background: "rgba(0,0,0,0.5)" }}
+    >
+      <div className=" z-50 flex flex-col items-center justify-center gap-5 rounded-lg bg-white p-6 ">
         {isSending ? (
           "File is being uploaded, please wait."
         ) : (
@@ -57,7 +60,7 @@ const FileModal: React.FC<FileModalProps> = ({ setModalOpen }) => {
               <img src="close-icon.svg" alt="Close-Icon" className=" w-5" />
             </button>
             <div className="flex gap-6">
-              <label htmlFor="journey-select">
+              <label htmlFor="journey-select" className="flex gap-2">
                 Journey
                 <input
                   id="journey-select"
@@ -66,11 +69,11 @@ const FileModal: React.FC<FileModalProps> = ({ setModalOpen }) => {
                   onChange={() => handleCheckboxChange("journey")}
                 />
               </label>
-              <label htmlFor="station-select" className=" gap-6">
+              <label htmlFor="station-select" className=" flex gap-2">
                 <input
-                  checked={fileType === "station"}
                   id="station-select"
                   type="checkbox"
+                  checked={fileType === "station"}
                   onChange={() => handleCheckboxChange("station")}
                 />
                 Station
