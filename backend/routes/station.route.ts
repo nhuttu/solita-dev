@@ -4,7 +4,7 @@ import { IStation } from "../utils/types";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", async (_req, res) => {
   const stations = await stationService.findStations();
   res.status(200).send(stations);
 });
@@ -18,13 +18,20 @@ router.get("/:id", async (req, res) => {
       .send({ error: `Parameter provided was not a valid number ` });
   } else {
     const station = (await stationService.findStation(id)) as IStation;
-    const popularDepartureStations =
-      await stationService.findPopularDepartureStationsForStation(id);
-    const popularReturnStations =
-      await stationService.findPopularReturnStationsForStation(id);
 
-    station.popularDepartures = popularDepartureStations;
-    station.popularReturns = popularReturnStations;
+    if (!station.popularDepartures)
+      station.popularDepartures =
+        await stationService.findPopularDepartureStationsForStation(id);
+    if (!station.popularReturns)
+      station.popularReturns =
+        await stationService.findPopularReturnStationsForStation(id);
+
+    if (!station.averageDistanceBegun)
+      station.averageDistanceBegun =
+        await stationService.findAverageDistanceStartingFromStation(id);
+    if (!station.averageDistanceEnded)
+      station.averageDistanceEnded =
+        await stationService.findAverageDistanceEndingAtStation(id);
 
     if (station) res.status(200).send(station);
     else

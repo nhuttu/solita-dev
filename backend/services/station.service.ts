@@ -46,6 +46,8 @@ const findPopularDepartureStationsForStation = async (
   return result;
 };
 
+// "select AVG(coveredDistance) from journey left join station as return_station  on journey.returnStationId = return_station.id where journey.returnStationId = 303"
+
 const findPopularReturnStationsForStation = async (
   id: number
 ): Promise<StationEntity[]> => {
@@ -63,9 +65,41 @@ const findPopularReturnStationsForStation = async (
   return result;
 };
 
+const findAverageDistanceStartingFromStation = async (
+  id: number
+): Promise<number> => {
+  const result = await journeyRepository
+    .createQueryBuilder("journey")
+    .select("AVG(journey.coveredDistance)", "avgCoveredDistance")
+    .leftJoin("journey.returnStation", "return_station")
+    .where("journey.returnStationId = :returnStationId", {
+      returnStationId: id,
+    })
+    .getRawOne();
+
+  return result.avgCoveredDistance;
+};
+
+const findAverageDistanceEndingAtStation = async (
+  id: number
+): Promise<number> => {
+  const result = await journeyRepository
+    .createQueryBuilder("journey")
+    .select("AVG(journey.coveredDistance)", "avgCoveredDistance")
+    .leftJoin("journey.departureStation", "departure_station")
+    .where("journey.departureStationId = :departureStationId", {
+      departureStationId: id,
+    })
+    .getRawOne();
+
+  return result.avgCoveredDistance;
+};
+
 // NOTE: Updating, deleting or creating stations are forbidden for now
 
 export default {
+  findAverageDistanceStartingFromStation,
+  findAverageDistanceEndingAtStation,
   findStation,
   findStations,
   findPopularDepartureStationsForStation,

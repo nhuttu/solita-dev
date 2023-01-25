@@ -28,4 +28,6 @@ export interface IStation {
   journeysEnded?: number;
   popularReturns?: IStation[];
   popularDepartures?: IStation[];
+  averageDistanceBegun?: number;
+  averageDistanceEnded?: number;
 }

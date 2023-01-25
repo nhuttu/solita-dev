@@ -1,6 +1,7 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import { fetchStationById } from "../../services/station.service";
 import { IStation } from "../../utils/types";
 
@@ -18,15 +19,22 @@ const Station = () => {
     }
   };
 
-  const { data, status, error } = useQuery<IStation | undefined, Error>(
+  const { data, error, refetch } = useQuery<IStation | undefined, Error>(
     "station",
     fetchStation
   );
 
+  console.log(data);
+
+  // Force refetch if ID changes meaning URL has changed
+  useEffect(() => {
+    refetch();
+  }, [id, refetch]);
+
   return (
     <Fragment>
       {data ? (
-        <div className=" flex h-full flex-col items-center gap-6 ">
+        <div className=" flex h-full flex-col items-center gap-6 " key={id}>
           <span className="text-4xl">
             Station name: {data.nameFI} / {data.nameSV}
           </span>
@@ -39,13 +47,26 @@ const Station = () => {
           <span className="text-2xl">
             Journeys ended at the station: {data.journeysEnded}
           </span>
+          <div className="flex flex-col gap-2">
+            <span>
+              Average distance that started from the station:{" "}
+              {data.averageDistanceBegun}
+            </span>
+            <span>
+              Average distance that ended at the station:{" "}
+              {data.averageDistanceEnded}
+            </span>
+            <span></span>
+          </div>
           <div className=" flex gap-5 text-2xl ">
             <div className="flex-1 ">
               Top 5 departure stations:
               {data.popularDepartures?.map((station) => {
                 return (
                   <div key={station.id} className=" text-base ">
-                    {station.nameFI} / {station.nameSV}
+                    <Link to={`/station/${station.id}`}>
+                      {station.nameFI} / {station.nameSV}
+                    </Link>
                   </div>
                 );
               })}
@@ -55,7 +76,9 @@ const Station = () => {
               {data.popularReturns?.map((station) => {
                 return (
                   <div key={station.id} className="text-base">
-                    {station.nameFI} / {station.nameSV}
+                    <Link to={`/station/${station.id}`}>
+                      {station.nameFI} / {station.nameSV}
+                    </Link>
                   </div>
                 );
               })}

@@ -32,4 +32,6 @@ export interface IStation extends StationEntity {
   journeysEnded?: number;
   popularReturns?: IStation[];
   popularDepartures?: IStation[];
+  averageDistanceBegun?: number;
+  averageDistanceEnded?: number;
 }
