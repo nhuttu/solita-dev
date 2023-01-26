@@ -16,7 +16,6 @@ export interface IJourney extends JourneyEntity {
 
 export interface IStation extends StationEntity {
   id: number;
-  stationID: number;
   nameFI: string;
   nameEN: string;
   nameSV: string;

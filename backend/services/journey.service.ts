@@ -10,10 +10,10 @@ const createJourney = async (
   journey: IJourney
 ): Promise<JourneyEntity> | null => {
   const departureStation = await stationRepository.findOne({
-    where: { id: Number(journey.departureStationID) },
+    where: { id: Number(journey.id) },
   });
   const returnStation = await stationRepository.findOne({
-    where: { id: Number(journey.returnStationID) },
+    where: { id: Number(journey.id) },
   });
 
   if (!departureStation || !returnStation) return null;
@@ -32,14 +32,15 @@ const createJourney = async (
   return await journeyRepository.save(journeyEntity);
 };
 
-const updateJourney = async (id: number, journey: IJourney) => {
-  const journeyEntity = await journeyRepository.findOne({ where: { id: id } });
+// Update is not necessary
+// const updateJourney = async (id: number, journey: IJourney) => {
+//   const journeyEntity = await journeyRepository.findOne({ where: { id: id } });
 
-  if (journeyEntity) {
-  }
+//   if (journeyEntity) {
+//   }
 
-  console.log("Journey update");
-};
+//   console.log("Journey update");
+// };
 
 const deleteJourney = async (id: number): Promise<JourneyEntity> | null => {
   const journeyEntity = await journeyRepository.findOne({ where: { id: id } });
@@ -88,7 +89,6 @@ const findJourneysWithPagination = async (
 
 export default {
   createJourney,
-  updateJourney,
   deleteJourney,
   findJourney,
   findJourneysWithPagination,

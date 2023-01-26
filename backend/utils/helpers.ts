@@ -157,10 +157,10 @@ export const assignPropertiesToJourneyEntity = async (
   const stationRepository = AppDataSource.getRepository(StationEntity);
 
   const departureStation = await stationRepository.findOne({
-    where: { stationID: Number(line[2]) },
+    where: { id: Number(line[2]) },
   });
   const returnStation = await stationRepository.findOne({
-    where: { stationID: Number(line[4]) },
+    where: { id: Number(line[4]) },
   });
 
   const newJourney = new JourneyEntity();
@@ -176,7 +176,7 @@ export const assignPropertiesToJourneyEntity = async (
 
 export const assignPropertiesToStationEntity = (line: string[]) => {
   const stationEntity = new StationEntity();
-  stationEntity.stationID = Number(line[1]);
+  stationEntity.id = Number(line[1]);
 
   stationEntity.nameFI = line[2];
   stationEntity.nameSV = line[3];
