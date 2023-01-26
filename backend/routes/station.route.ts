@@ -19,19 +19,21 @@ router.get("/:id", async (req, res) => {
   } else {
     const station = (await stationService.findStation(id)) as IStation;
 
-    if (!station.popularDepartures)
-      station.popularDepartures =
-        await stationService.findPopularDepartureStationsForStation(id);
-    if (!station.popularReturns)
-      station.popularReturns =
-        await stationService.findPopularReturnStationsForStation(id);
+    station.popularDepartures =
+      await stationService.findPopularDepartureStationsForStation(id);
 
-    if (!station.averageDistanceBegun)
-      station.averageDistanceBegun =
-        await stationService.findAverageDistanceStartingFromStation(id);
-    if (!station.averageDistanceEnded)
-      station.averageDistanceEnded =
-        await stationService.findAverageDistanceEndingAtStation(id);
+    station.popularReturns =
+      await stationService.findPopularReturnStationsForStation(id);
+
+    station.averageDistanceBegun =
+      await stationService.findAverageDistanceStartingFromStation(id);
+
+    station.averageDistanceEnded =
+      await stationService.findAverageDistanceEndingAtStation(id);
+
+    station.journeysEnded = await stationService.findJourneysStartedCount(id);
+
+    station.journeysEnded = await stationService.findJourneysEndedCount(id);
 
     if (station) res.status(200).send(station);
     else

@@ -14,19 +14,23 @@ const findStation = async (id: number): Promise<StationEntity> | null => {
     where: { id: id },
   });
 
-  station.journeysStarted = await journeyRepository.count({
-    where: {
-      departureStation: { id: station.id },
-    },
-  });
-
-  station.journeysEnded = await journeyRepository.count({
-    where: {
-      returnStation: { id: station.id },
-    },
-  });
-
   return station;
+};
+
+const findJourneysStartedCount = async (id: number) => {
+  return await journeyRepository.count({
+    where: {
+      departureStation: { id: id },
+    },
+  });
+};
+
+const findJourneysEndedCount = async (id: number) => {
+  return await journeyRepository.count({
+    where: {
+      returnStation: { id: id },
+    },
+  });
 };
 
 const findPopularDepartureStationsForStation = async (
@@ -98,6 +102,8 @@ const findAverageDistanceEndingAtStation = async (
 // NOTE: Updating, deleting or creating stations are forbidden for now
 
 export default {
+  findJourneysEndedCount,
+  findJourneysStartedCount,
   findAverageDistanceStartingFromStation,
   findAverageDistanceEndingAtStation,
   findStation,

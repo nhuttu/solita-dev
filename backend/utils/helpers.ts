@@ -8,9 +8,9 @@ const isISO8601 = (iso8601: string) => {
   return iso8601Regex.test(iso8601);
 };
 
-const validateNumberAndLargerThan10 = (index: unknown): index is number => {
+const validateNumberAndNotLessThan10 = (index: unknown): index is number => {
   const num = Number(index);
-  return !isNaN(num) && num > 10;
+  return !isNaN(num) && num > 9;
 };
 
 const validateNumberAndPositive = (index: unknown): index is number => {
@@ -49,10 +49,10 @@ export const validateCSVJourneyRow = (line: unknown): boolean => {
   const validateReturnStationName = validateTextAndNotTooLong(line[5]);
   if (!validateReturnStationName) return false;
 
-  const validateCoveredDistance = validateNumberAndLargerThan10(line[6]);
+  const validateCoveredDistance = validateNumberAndNotLessThan10(line[6]);
   if (!validateCoveredDistance) return false;
 
-  const validateJourneyDuration = validateNumberAndLargerThan10(line[7]);
+  const validateJourneyDuration = validateNumberAndNotLessThan10(line[7]);
   if (!validateJourneyDuration) return false;
 
   return true;
@@ -134,13 +134,13 @@ export const validateIJourney = (obj: unknown): obj is IJourney => {
   if (!validateDepartureStation)
     throw new Error("Invalid departure station ID type!");
 
-  const validateCoveredDistance = validateNumberAndLargerThan10(
+  const validateCoveredDistance = validateNumberAndNotLessThan10(
     journey.coveredDistance
   );
   if (!validateCoveredDistance)
     throw new Error("Invalid covered distance type!");
 
-  const validateDuration = validateNumberAndLargerThan10(journey.duration);
+  const validateDuration = validateNumberAndNotLessThan10(journey.duration);
   if (!validateDuration) throw new Error("Invalid duration type!");
 
   const validateDeparture = isISO8601(journey.departure);

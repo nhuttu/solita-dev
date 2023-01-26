@@ -36,15 +36,9 @@ export class StationEntity {
   @Column()
   capacity: number;
 
-  @Column({ nullable: true })
-  journeysStarted?: number;
-
-  @Column({ nullable: true })
-  journeysEnded?: number;
-
-  @Column({ type: "decimal", precision: 10 })
+  @Column({ type: "decimal", precision: 6 })
   coordinateX: number;
 
-  @Column({ type: "decimal", precision: 10 })
+  @Column({ type: "decimal", precision: 6 })
   coordinateY: number;
 }

@@ -10,10 +10,10 @@ const createJourney = async (
   journey: IJourney
 ): Promise<JourneyEntity> | null => {
   const departureStation = await stationRepository.findOne({
-    where: { id: journey.departureStationID },
+    where: { id: Number(journey.departureStationID) },
   });
   const returnStation = await stationRepository.findOne({
-    where: { id: journey.returnStationID },
+    where: { id: Number(journey.returnStationID) },
   });
 
   if (!departureStation || !returnStation) return null;
