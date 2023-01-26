@@ -1,4 +1,5 @@
 import axios from "axios";
+import { IJourney, INewJourney } from "../utils/types";
 
 export const fetch50Journeys = async (
   page: number,
@@ -6,7 +7,7 @@ export const fetch50Journeys = async (
     return: string;
     departure: string;
   }
-) => {
+): Promise<IJourney[]> => {
   const response = await axios.get(
     `http://localhost:3000/journeys?page=${page}&departure=${filters.departure}&return=${filters.return}`
   );
@@ -15,5 +16,10 @@ export const fetch50Journeys = async (
 
 export const fetchJourneyById = async (id: string) => {
   const response = await axios.get(`http://localhost:3000/journeys/${id}`);
+  return response.data;
+};
+
+export const createJourney = async (journey: INewJourney) => {
+  const response = await axios.post(`http://localhost:3000/journeys`, journey);
   return response.data;
 };

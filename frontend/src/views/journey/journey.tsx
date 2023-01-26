@@ -35,18 +35,18 @@ const Journey = () => {
             This journey ended at: {data?.returnStation?.nameFI}
           </span>
           <span className="text-1xl">
-            Journey departure: {data.departure.split("T")[0]} at
+            Journey departure: {data.departure.split("T")[0]} at{" "}
             {data.departure.split("T")[1]}
           </span>
           <span className="text-1xl">
-            Journey return: {data.return.split("T")[0]} at
+            Journey return: {data.return.split("T")[0]} at{" "}
             {data.return.split("T")[1]}
           </span>
           <span className="text-1xl">
             Journey duration: {(data.duration / 60).toFixed(2)} minutes
           </span>
           <span className="text-1xl">
-            Journey coveredDistance: {(data.coveredDistance / 1000).toFixed(2)}{" "}
+            Journey covered distance: {(data.coveredDistance / 1000).toFixed(2)}{" "}
             kilometres
           </span>
         </div>

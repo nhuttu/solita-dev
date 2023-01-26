@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useInfiniteQuery } from "react-query";
+import { Link } from "react-router-dom";
 import FileModal from "../../modals/file-modal";
 import { fetch50Journeys } from "../../services/journey.service";
 import { IJourney } from "../../utils/types";
@@ -13,7 +14,9 @@ const Journeys = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [filterWords, setFilterWords] = useState({ return: "", departure: "" });
 
-  const journeyQueryFn = async (pageParam = page) => {
+  const journeyQueryFn = async (
+    pageParam = page
+  ): Promise<IJourney[] | undefined> => {
     try {
       const response = await fetch50Journeys(pageParam, filterWords);
 
@@ -35,7 +38,7 @@ const Journeys = () => {
     isFetchingPreviousPage,
     fetchPreviousPage,
     refetch,
-  } = useInfiniteQuery<IJourney[], Error>({
+  } = useInfiniteQuery<IJourney[] | undefined, Error>({
     queryKey: ["journeys"],
     queryFn: (page) => journeyQueryFn(page.pageParam),
     getNextPageParam: () => {
@@ -115,6 +118,9 @@ const Journeys = () => {
           type="text"
         />
         Departure station name filter
+        <button className="w-max rounded border-2 border-black">
+          <Link to="/journey">Create a journey</Link>
+        </button>
       </div>
       {journeys.length > 0 && status === "success" ? (
         <JourneyTable journeys={journeys} />

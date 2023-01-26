@@ -10,6 +10,15 @@ export interface IJourney {
   duration: number;
 }
 
+export interface INewJourney {
+  departure: iso8601;
+  return: iso8601;
+  departureStationID: number;
+  returnStationID: number;
+  coveredDistance: number;
+  duration: number;
+}
+
 export interface IStation {
   id: number;
   stationID: number;

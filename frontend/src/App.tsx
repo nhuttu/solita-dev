@@ -5,6 +5,7 @@ import Header from "./views/header";
 import Home from "./views/home";
 import Journey from "./views/journey/journey";
 import Journeys from "./views/journey/journeys";
+import NewJourney from "./views/journey/new-journey";
 import NotFound from "./views/not-found";
 import Station from "./views/station/station";
 import Stations from "./views/station/stations";
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/journeys" element={<Journeys />} />
         <Route path="/journey/:id" element={<Journey />} />
+        <Route path="/journey" element={<NewJourney />} />
         <Route path="/stations" element={<Stations />} />
         <Route path="/station/:id" element={<Station />} />
         <Route path="*" element={<NotFound />} />
