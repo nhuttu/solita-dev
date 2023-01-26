@@ -19,10 +19,10 @@ const Station = () => {
     }
   };
 
-  const { data, error, refetch } = useQuery<IStation | undefined, Error>(
-    "station",
-    fetchStation
-  );
+  const { data, error, refetch, isFetching } = useQuery<
+    IStation | undefined,
+    Error
+  >("station", fetchStation);
 
   console.log(data);
 
@@ -49,12 +49,12 @@ const Station = () => {
           </span>
           <div className="flex flex-col gap-2">
             <span>
-              Average distance that started from the station:{" "}
-              {data.averageDistanceBegun}
+              Average distance that started from the station:
+              {data.averageDistanceBegun?.toFixed(2)}
             </span>
             <span>
-              Average distance that ended at the station:{" "}
-              {data.averageDistanceEnded}
+              Average distance that ended at the station:
+              {data.averageDistanceEnded?.toFixed(2)}
             </span>
             <span></span>
           </div>
@@ -85,8 +85,10 @@ const Station = () => {
             </div>
           </div>
         </div>
+      ) : isFetching ? (
+        <div className="flex h-full justify-center">Fetching...</div>
       ) : error ? (
-        <div>Error: {error.message}</div>
+        <div className="h-full">Error: {error.message}</div>
       ) : (
         <div className="h-full">Data was not found with ID: {id}</div>
       )}
