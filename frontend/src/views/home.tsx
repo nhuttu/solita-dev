@@ -19,9 +19,9 @@ const Home = () => {
         >
           Upload CSV file
         </button>
-        Want to create a new journey entry?
+        Want to create a new journey?
         <button className="rounder w-28 border border-black">
-          <Link to="/journey">Create journey entry</Link>
+          <Link to="/journey">Create new journey</Link>
         </button>
       </div>
     </Fragment>

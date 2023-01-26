@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IJourney, INewJourney } from "../utils/types";
+import { IJourney, IJourneyEntry } from "../utils/types";
 
 export const fetch50Journeys = async (
   page: number,
@@ -19,7 +19,7 @@ export const fetchJourneyById = async (id: string) => {
   return response.data;
 };
 
-export const createJourney = async (journey: INewJourney) => {
+export const createJourney = async (journey: IJourneyEntry) => {
   const response = await axios.post(`http://localhost:3000/journeys`, journey);
   return response.data;
 };

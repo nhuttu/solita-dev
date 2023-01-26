@@ -77,9 +77,11 @@ const Journeys = () => {
   return (
     <div className="flex min-h-full flex-col items-center gap-5">
       <div className="flex items-center justify-center gap-4">
-        Return station name filter
+        <label id="return-filter">Return station name filter</label>
+
         <input
           className="rounded border-2 border-black"
+          id="return-filter"
           onChange={(e) => handleFilterChange(e, "return")}
           defaultValue={filterWords.return}
           type="text"
@@ -113,11 +115,12 @@ const Journeys = () => {
         </button>
         <input
           className="rounded border-2 border-black"
+          id="departure-filter"
           onChange={(e) => handleFilterChange(e, "departure")}
           defaultValue={filterWords.departure}
           type="text"
         />
-        Departure station name filter
+        <label htmlFor="departure-filter">Departure station name filter</label>
         <button className="w-max rounded border-2 border-black">
           <Link to="/journey">Create a journey</Link>
         </button>

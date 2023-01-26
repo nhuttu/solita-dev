@@ -6,9 +6,17 @@ interface StationsProps {
   stations: IStation[];
 }
 
+/**
+ * StationTable is a functional react component that renders a table of station data.
+ *
+ * @param {StationsProps} props - The props for the component.
+ * @param {IStation[]} props.stations - An array of IStation objects representing the station data to be displayed in the table.
+ *
+ * @returns {JSX.Element} - A JSX table element with the station data.
+ */
 const StationTable: React.FC<StationsProps> = ({ stations }) => {
   return (
-    <table className=" mb-5 w-max table-auto border-collapse items-center justify-center">
+    <table className=" mb-5 h-full w-full table-auto border-collapse ">
       <tbody>
         <tr>
           <th className="px-4 py-2 text-left">Name (FI)</th>

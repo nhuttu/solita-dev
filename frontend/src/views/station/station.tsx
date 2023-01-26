@@ -1,12 +1,19 @@
-import { Fragment, useEffect } from "react";
+import { AxiosError } from "axios";
+import { Fragment, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { fetchStationById } from "../../services/station.service";
 import { IStation } from "../../utils/types";
+import Alert from "../alert";
 
 const Station = () => {
   const { id } = useParams();
+
+  const [notification, setNotification] = useState<{
+    message: string;
+    type: "success" | "error";
+  } | null>({ message: "", type: "success" });
 
   const fetchStation = async (): Promise<IStation | undefined> => {
     if (id) {
@@ -14,7 +21,12 @@ const Station = () => {
         const res = await fetchStationById(id);
         return res;
       } catch (e) {
-        console.log(e, "Something went wrong with the fetch");
+        let error = e as AxiosError;
+        setNotification({
+          message: `Something went wrong with the fetch!: ${error.message} `,
+          type: "error",
+        });
+        setTimeout(() => setNotification(null), 3000);
       }
     }
   };
@@ -24,8 +36,6 @@ const Station = () => {
     Error
   >("station", fetchStation);
 
-  console.log(data);
-
   // Force refetch if ID changes meaning URL has changed
   useEffect(() => {
     refetch();
@@ -33,6 +43,7 @@ const Station = () => {
 
   return (
     <Fragment>
+      {notification && <Alert notification={notification} />}
       {data ? (
         <div className=" flex h-full flex-col items-center gap-6 " key={id}>
           <span className="text-4xl">

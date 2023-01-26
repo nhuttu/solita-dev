@@ -3,11 +3,11 @@ import { useMutation, useQuery } from "react-query";
 import { createJourney } from "../../services/journey.service";
 import { fetchStations } from "../../services/station.service";
 import { validateNewJourney } from "../../utils/helpers";
-import { IJourney, INewJourney } from "../../utils/types";
+import { IJourney, IJourneyEntry } from "../../utils/types";
 import Alert from "../alert";
 
 const NewJourney = () => {
-  const [journey, setJourney] = useState<INewJourney>({
+  const [journey, setJourney] = useState<IJourneyEntry>({
     return: "",
     departure: "",
     departureStationID: 1,
@@ -64,8 +64,11 @@ const NewJourney = () => {
       <div className="flex h-full items-center justify-center">
         <div className="flex flex-col gap-5">
           <>
-            When did you departure? (year-day-month-T-hour-minute-second)
+            <label htmlFor="departure-input">
+              When did you departure? (year-day-month-T-hour-minute-second)
+            </label>
             <input
+              id="departure-input"
               type="text"
               value={journey.departure}
               className=" rounded border border-black "
@@ -73,9 +76,12 @@ const NewJourney = () => {
             />
           </>
           <>
-            When did you return? (year-day-month-T-hour-minute-second)
+            <label htmlFor="return-input">
+              When did you return? (year-day-month-T-hour-minute-second)
+            </label>
             <input
               type="text"
+              id="return-input"
               value={journey.return}
               className="rounded border border-black "
               onChange={(e) => handleJourneyKeyChange(e, "return")}
@@ -87,7 +93,7 @@ const NewJourney = () => {
             className="border border-black"
           >
             {stationData?.map((station) => (
-              <option value={Number(station.stationID)} key={station.id}>
+              <option value={Number(station.id)} key={station.id}>
                 {station.nameFI}
               </option>
             ))}
@@ -98,22 +104,28 @@ const NewJourney = () => {
             className="border border-black"
           >
             {stationData?.map((station) => (
-              <option value={Number(station.stationID)} key={station.id}>
+              <option value={Number(station.id)} key={station.id}>
                 {station.nameFI}
               </option>
             ))}
           </select>
-          How long was the duration (s)? (min 10)
+          <label htmlFor="duration-input">
+            How long was the duration (s)? (min 10)
+          </label>
           <input
             type="number"
+            id="duration-input"
             className="rounded border border-black "
             onChange={(e) => handleJourneyKeyChange(e, "duration")}
             value={journey.duration}
           />
-          How long was the covered distance (m)? (min 10)
+          <label htmlFor="covered-distance-input">
+            How long was the covered distance (m)? (min 10)
+          </label>
           <input
             value={journey.coveredDistance}
             type="number"
+            id="covered-distance-input"
             className="rounded border border-black "
             onChange={(e) => handleJourneyKeyChange(e, "coveredDistance")}
           />
