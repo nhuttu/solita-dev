@@ -10,7 +10,7 @@ export interface IJourney {
   duration: number;
 }
 
-export interface INewJourney {
+export interface IJourneyEntry {
   departure: iso8601;
   return: iso8601;
   departureStationID: number;
@@ -21,7 +21,6 @@ export interface INewJourney {
 
 export interface IStation {
   id: number;
-  stationID: number;
   nameFI: string;
   nameEN: string;
   nameSV: string;
@@ -39,4 +38,18 @@ export interface IStation {
   popularDepartures?: IStation[];
   averageDistanceBegun?: number;
   averageDistanceEnded?: number;
+}
+
+export interface IStationEntry {
+  nameFI: string;
+  nameEN: string;
+  nameSV: string;
+  addressFI: string;
+  addressSV: string;
+  cityFI: string;
+  citySV: string;
+  operator: string;
+  capacity: number;
+  coordinateX: number;
+  coordinateY: number;
 }

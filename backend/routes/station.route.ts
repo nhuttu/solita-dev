@@ -41,10 +41,9 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// NOTE: Updating, deleting or creating stations are forbidden for now
-// router.post("/", (req, res) => {
-//   res.send("STATIONS");
-// });
+router.post("/", (req, res) => {
+  res.send("STATIONS");
+});
 
 // router.delete("/", (req, res) => {
 //   res.send("STATIONS");
