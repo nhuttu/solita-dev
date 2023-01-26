@@ -5,6 +5,7 @@ import {
   uploadJourneyCSVFile,
   uploadStationCSVFile,
 } from "../services/file.service";
+import Alert from "../views/alert";
 
 interface FileModalProps {
   setModalOpen: Dispatch<SetStateAction<boolean>>;
@@ -14,7 +15,10 @@ const FileModal: React.FC<FileModalProps> = ({ setModalOpen }) => {
   const [file, setFile] = useState<File>();
   const [fileType, setFileType] = useState<"journey" | "station">();
   const [isSending, setIsSending] = useState<boolean>(false);
-  const [notification, setNotification] = useState<string>();
+  const [notification, setNotification] = useState<{
+    message: string;
+    type: "success" | "error";
+  } | null>({ message: "", type: "success" });
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     console.log(event.target.files);
@@ -38,8 +42,18 @@ const FileModal: React.FC<FileModalProps> = ({ setModalOpen }) => {
         } else {
           await uploadStationCSVFile(file);
         }
+        setNotification({
+          type: "success",
+          message: "CSV file successfully uploaded!",
+        });
       } catch (e) {
         let error = e as AxiosError;
+        setNotification({
+          type: "error",
+          message:
+            (error.response?.data as string) ??
+            "Something went wrong with the upload",
+        });
         console.log(error.response?.data);
       }
     }
@@ -51,6 +65,7 @@ const FileModal: React.FC<FileModalProps> = ({ setModalOpen }) => {
       className=" fixed top-0 left-0 right-0 bottom-0 z-10 flex items-center justify-center"
       style={{ background: "rgba(0,0,0,0.5)" }}
     >
+      {notification && <Alert notification={notification} />}
       <div className=" z-50 flex flex-col items-center justify-center gap-5 rounded-lg bg-white p-6 ">
         {isSending ? (
           "File is being uploaded, please wait."
