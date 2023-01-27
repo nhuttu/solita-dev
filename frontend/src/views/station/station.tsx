@@ -1,14 +1,18 @@
 import { AxiosError } from "axios";
 import { Fragment, useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import { useParams } from "react-router";
+import { useMutation, useQuery } from "react-query";
+import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { fetchStationById } from "../../services/station.service";
+import {
+  deleteStation,
+  fetchStationById,
+} from "../../services/station.service";
 import { IStation } from "../../utils/types";
 import Alert from "../alert";
 
 const Station = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [notification, setNotification] = useState<{
     message: string;
@@ -36,16 +40,50 @@ const Station = () => {
     Error
   >("station", fetchStation);
 
+  const { mutate, data: remove } = useMutation({ mutationFn: deleteStation });
+
   // Force refetch if ID changes meaning URL has changed
   useEffect(() => {
     refetch();
   }, [id, refetch]);
+
+  console.log(remove);
+
+  const handleDelete = () => {
+    if (id) {
+      mutate(Number(id), {
+        onSuccess: () => {
+          setNotification({
+            type: "success",
+            message: "Station deleted! Redirecting in 3..2..1",
+          });
+          setTimeout(() => {
+            setNotification(null);
+            navigate("/stations");
+          }, 3000);
+        },
+        onError: () => {
+          setNotification({
+            type: "error",
+            message: "Something went wrong with the deletion!",
+          });
+          setTimeout(() => setNotification(null), 3000);
+        },
+      });
+    }
+  };
 
   return (
     <Fragment>
       {notification && <Alert notification={notification} />}
       {data ? (
         <div className=" flex h-full flex-col items-center gap-6 " key={id}>
+          <button
+            className="rounded border-2 border-black"
+            onClick={handleDelete}
+          >
+            Delete station
+          </button>
           <span className="text-4xl">
             Station name: {data.nameFI} / {data.nameSV}
           </span>

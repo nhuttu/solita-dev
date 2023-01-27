@@ -16,10 +16,18 @@ export const fetch50Journeys = async (
 
 export const fetchJourneyById = async (id: string) => {
   const response = await axios.get(`http://localhost:3000/journeys/${id}`);
+
   return response.data;
 };
 
 export const createJourney = async (journey: IJourneyEntry) => {
   const response = await axios.post(`http://localhost:3000/journeys`, journey);
+
+  return response.data;
+};
+
+export const deleteJourney = async (id: number) => {
+  const response = await axios.delete(`http://localhost:3000/journeys/${id}`);
+
   return response.data;
 };
