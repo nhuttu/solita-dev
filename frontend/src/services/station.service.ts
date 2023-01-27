@@ -15,4 +15,7 @@ export const fetchStationById = async (
   return response.data;
 };
 
-export const createStation = async (station: IStationEntry) => {};
+export const createStation = async (station: IStationEntry) => {
+  const response = await axios.post(`http://localhost:3000/stations`, station);
+  return response.data;
+};

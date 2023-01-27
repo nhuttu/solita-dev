@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { ChangeEvent, Fragment, useEffect, useState } from "react";
 import { useMutation, useQuery } from "react-query";
 import { createJourney } from "../../services/journey.service";
 import { fetchStations } from "../../services/station.service";
@@ -26,12 +26,13 @@ const NewJourney = () => {
 
   const { data: stationData } = useQuery("stations", fetchStations);
 
-  const handleJourneyKeyChange = (event: any, key: keyof IJourney) => {
+  const handleJourneyKeyChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    key: keyof IJourney
+  ) => {
     console.log(event.target.value);
     setJourney({ ...journey, [key]: event.target.value });
   };
-
-  console.log(journey);
 
   const handleSubmit = () => {
     try {

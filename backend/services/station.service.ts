@@ -1,6 +1,7 @@
 import { AppDataSource } from "../database";
 import { JourneyEntity } from "../entities/journey.entity";
 import { StationEntity } from "../entities/station.entity";
+import { IStationEntry } from "../utils/types";
 
 const stationRepository = AppDataSource.getRepository(StationEntity);
 const journeyRepository = AppDataSource.getRepository(JourneyEntity);
@@ -15,6 +16,41 @@ const findStation = async (id: number): Promise<StationEntity> | null => {
   });
 
   return station;
+};
+
+const createStation = async (
+  station: IStationEntry
+): Promise<StationEntity> => {
+  const stationEntity = new StationEntity();
+
+  stationEntity.addressFI = station.addressFI;
+  stationEntity.addressSV = station.addressSV;
+
+  stationEntity.capacity = station.capacity;
+  stationEntity.operator = station.operator;
+
+  stationEntity.coordinateX = station.coordinateX;
+  stationEntity.coordinateY = station.coordinateY;
+
+  stationEntity.cityFI = station.cityFI;
+  stationEntity.citySV = station.citySV;
+
+  stationEntity.nameEN = station.nameEN;
+  stationEntity.nameFI = station.nameFI;
+  stationEntity.nameSV = station.nameSV;
+
+  return await stationRepository.save(stationEntity);
+};
+
+const deleteStation = async (id: number) => {
+  const station = await stationRepository.findOne({
+    where: { id: id },
+  });
+
+  if (station) {
+    await stationRepository.delete(station);
+    return station;
+  } else return null;
 };
 
 const findJourneysStartedCount = async (id: number) => {
@@ -110,4 +146,6 @@ export default {
   findStations,
   findPopularDepartureStationsForStation,
   findPopularReturnStationsForStation,
+  deleteStation,
+  createStation,
 };

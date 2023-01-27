@@ -1,5 +1,6 @@
 import express from "express";
 import stationService from "../services/station.service";
+import { validateStationEntry } from "../utils/helpers";
 import { IStation } from "../utils/types";
 
 const router = express.Router();
@@ -41,12 +42,27 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", (req, res) => {
-  res.send("STATIONS");
+router.post("/", async (req, res) => {
+  try {
+    validateStationEntry(req.body);
+    const station = await stationService.createStation(req.body);
+    res.status(200).send(station);
+  } catch (e) {
+    res.status(400).send({ error: e.message });
+  }
 });
 
-// router.delete("/", (req, res) => {
-//   res.send("STATIONS");
-// });
+router.delete("/:id", async (req, res) => {
+  const id = Number(req.params.id);
+
+  if (isNaN(id)) {
+    res.status(400).send({ error: "ID was not of valid type" });
+  } else {
+    const station = await stationService.deleteStation(id);
+    if (station) res.status(200).send(station);
+    else
+      res.status(404).send({ error: `Station with ID ${id} was not found ` });
+  }
+});
 
 export default router;
