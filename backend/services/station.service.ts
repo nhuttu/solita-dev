@@ -48,7 +48,7 @@ const deleteStation = async (id: number) => {
   });
 
   if (station) {
-    await stationRepository.delete(station);
+    await stationRepository.remove(station);
     return station;
   } else return null;
 };
