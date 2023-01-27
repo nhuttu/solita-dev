@@ -4,6 +4,7 @@ import { StationEntity } from "../entities/station.entity";
 export type iso8601 = string;
 
 export interface IJourney extends JourneyEntity {
+  id: number;
   departure: iso8601;
   return: iso8601;
   departureStationID: number;
@@ -34,3 +35,7 @@ export interface IStation extends StationEntity {
   averageDistanceBegun?: number;
   averageDistanceEnded?: number;
 }
+
+export type IStationEntry = Omit<IStation, "id">;
+
+export type IJourneyEntry = Omit<IJourney, "id">;

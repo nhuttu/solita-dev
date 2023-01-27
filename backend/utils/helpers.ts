@@ -1,7 +1,7 @@
 import { AppDataSource } from "../database";
 import { JourneyEntity } from "../entities/journey.entity";
 import { StationEntity } from "../entities/station.entity";
-import { IJourney } from "./types";
+import { IJourney, IStationEntry } from "./types";
 
 const isISO8601 = (iso8601: string) => {
   const iso8601Regex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/;
@@ -117,7 +117,7 @@ export const checkIfJourneySeedIsNeeded = () => {
   });
 };
 
-export const validateIJourney = (obj: unknown): obj is IJourney => {
+export const validateJourneyEntry = (obj: unknown): obj is IJourney => {
   if (typeof obj !== "object" || Object.keys(obj).length !== 6)
     throw new Error("Value provided was not an object or of correct length!");
   const journey = obj as IJourney;
@@ -194,4 +194,24 @@ export const assignPropertiesToStationEntity = (line: string[]) => {
   stationEntity.coordinateY = Number(line[12]);
 
   return stationEntity;
+};
+
+export const validateStationEntry = (station: IStationEntry) => {
+  if (!station.addressFI) throw new Error("Address FI was not provided!");
+  if (!station.addressSV) throw new Error("Address EN was not provided!");
+
+  if (!station.cityFI) throw new Error("City FI was not provided!");
+  if (!station.citySV) throw new Error("City SV was not provided!");
+
+  if (!station.nameEN) throw new Error("Name EN was not provided!");
+  if (!station.nameFI) throw new Error("Name FI was not provided!");
+  if (!station.nameSV) throw new Error("Name SV was not provided!");
+
+  if (!station.operator) throw new Error("Operator was not provided!");
+  if (!Number(station.coordinateX))
+    throw new Error("Coordinate X was not provided!");
+  if (!Number(station.coordinateY))
+    throw new Error("Coordinate X was not provided!");
+
+  if (!Number(station.capacity)) throw new Error("Capacity was not provided!");
 };

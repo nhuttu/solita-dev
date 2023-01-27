@@ -1,7 +1,7 @@
 import express from "express";
 
 import journeyService from "../services/journey.service";
-import { validateIJourney } from "../utils/helpers";
+import { validateJourneyEntry } from "../utils/helpers";
 
 const router = express.Router();
 
@@ -41,11 +41,12 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    validateIJourney(req.body);
+    validateJourneyEntry(req.body);
     const journey = await journeyService.createJourney(req.body);
     res.status(200).send(journey);
   } catch (e) {
-    res.status(400).send({ error: e });
+    console.log(e);
+    res.status(400).send({ error: e.message });
   }
 });
 
@@ -62,8 +63,9 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-router.put("/:id", (req, res) => {
-  res.send("JOURNEYS");
-});
+// Update is not needed
+// router.put("/:id", (req, res) => {
+//   res.send("JOURNEYS");
+// });
 
 export default router;
