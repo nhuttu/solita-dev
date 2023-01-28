@@ -15,12 +15,22 @@ export class JourneyEntity {
   return: iso8601;
 
   // NOTE: make it explicit that the relation is not eager
-  @ManyToOne((type) => StationEntity, { eager: false, nullable: true })
-  departureStation?: StationEntity;
+  // This cascade is questionable, this means all journeys related to StationEntity will be removed too
+  @ManyToOne((type) => StationEntity, {
+    eager: false,
+    nullable: false,
+    onDelete: "CASCADE",
+  })
+  departureStation: StationEntity;
 
   // NOTE: make it explicit that the relation is not eager
-  @ManyToOne((type) => StationEntity, { eager: false, nullable: true })
-  returnStation?: StationEntity;
+  // This cascade is questionable, this means all journeys related to StationEntity will be removed too
+  @ManyToOne((type) => StationEntity, {
+    eager: false,
+    nullable: false,
+    onDelete: "CASCADE",
+  })
+  returnStation: StationEntity;
 
   @Column()
   coveredDistance: number;

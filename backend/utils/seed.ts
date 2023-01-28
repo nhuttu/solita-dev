@@ -59,7 +59,7 @@ export const seedDatabaseWithStations = (file: string) => {
 
           try {
             await AppDataSource.query(
-              "INSERT INTO station (id, nameFI, nameSV, nameEN, addressFI, addressSV, cityFI, citySV, operator, capacity, coordinateX, coordinateY) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+              "INSERT INTO station (stationID, nameFI, nameSV, nameEN, addressFI, addressSV, cityFI, citySV, operator, capacity, coordinateX, coordinateY) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
               Object.values(stationEntity)
             );
           } catch (e) {

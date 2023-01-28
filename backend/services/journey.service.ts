@@ -1,19 +1,19 @@
 import { AppDataSource } from "../database";
 import { JourneyEntity } from "../entities/journey.entity";
 import { StationEntity } from "../entities/station.entity";
-import { IJourney } from "../utils/types";
+import { IJourneyEntry } from "../utils/types";
 
 const journeyRepository = AppDataSource.getRepository(JourneyEntity);
 const stationRepository = AppDataSource.getRepository(StationEntity);
 
 const createJourney = async (
-  journey: IJourney
+  journey: IJourneyEntry
 ): Promise<JourneyEntity> | null => {
   const departureStation = await stationRepository.findOne({
-    where: { id: Number(journey.id) },
+    where: { id: Number(journey.departureStationID) },
   });
   const returnStation = await stationRepository.findOne({
-    where: { id: Number(journey.id) },
+    where: { id: Number(journey.returnStationID) },
   });
 
   if (!departureStation || !returnStation) return null;

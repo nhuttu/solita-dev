@@ -28,7 +28,7 @@ AppDataSource.initialize()
   .then(async () => {
     if (await checkIfStationsSeedIsNeeded()) {
       try {
-        await seedDatabaseWithStations("stations.csv");
+        // await seedDatabaseWithStations("stations.csv");
       } catch (e) {
         console.log(
           e,

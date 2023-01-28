@@ -7,6 +7,9 @@ export class StationEntity {
   id: number;
 
   @Column()
+  stationID: number;
+
+  @Column()
   nameFI: string;
 
   @Column()
