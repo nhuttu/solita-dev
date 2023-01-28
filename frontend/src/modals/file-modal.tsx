@@ -46,6 +46,8 @@ const FileModal: React.FC<FileModalProps> = ({ setModalOpen }) => {
           type: "success",
           message: "CSV file successfully uploaded!",
         });
+        setTimeout(() => setNotification(null), 3000);
+        setFile(undefined);
       } catch (e) {
         let error = e as AxiosError;
         setNotification({
@@ -54,7 +56,6 @@ const FileModal: React.FC<FileModalProps> = ({ setModalOpen }) => {
             (error.response?.data as string) ??
             "Something went wrong with the upload",
         });
-        console.log(error.response?.data);
       }
     }
     setIsSending(false);
@@ -94,14 +95,13 @@ const FileModal: React.FC<FileModalProps> = ({ setModalOpen }) => {
                 Station
               </label>
             </div>
-            <label htmlFor="csv-modal-download">
-              <input
-                id="csv-modal-download"
-                type="file"
-                accept=".csv"
-                onChange={handleFileChange}
-              />
-            </label>
+            <label htmlFor="csv-modal-download"></label>
+            <input
+              id="csv-modal-download"
+              type="file"
+              accept=".csv"
+              onChange={handleFileChange}
+            />
             {file && fileType && (
               <button onClick={() => handleFileSend()}>Send file</button>
             )}

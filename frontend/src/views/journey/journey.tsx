@@ -73,10 +73,12 @@ const Journey = () => {
           </button>
           <span className="text-4xl"> Journey number: {id}</span>
           <span className="text-2xl">
-            This journey started from: {data?.departureStation?.nameFI}
+            This journey started from:{" "}
+            {data?.departureStation?.nameFI ?? "Station not found"}
           </span>
           <span className="text-2xl">
-            This journey ended at: {data?.returnStation?.nameFI}
+            This journey ended at:{" "}
+            {data?.returnStation?.nameFI ?? "Station not found"}
           </span>
           <span className="text-1xl">
             Journey departure: {data.departure.split("T")[0]} at{" "}

@@ -9,7 +9,6 @@ const Stations = () => {
   const { data, error, isFetching } = useQuery<IStation[] | undefined, Error>({
     queryKey: ["stations"],
     queryFn: fetchStations,
-    retry: false,
   });
 
   const [filter, setFilter] = useState("");
@@ -21,7 +20,7 @@ const Stations = () => {
   return (
     <div className="min-h-full">
       {isFetching ? (
-        <p>Fetching</p>
+        <div className="flex items-center justify-center">Fetching</div>
       ) : error ? (
         <p>{error.message}</p>
       ) : data ? (

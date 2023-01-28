@@ -45,7 +45,7 @@ const Journeys = () => {
       return journeys.length === 50 ? page + 1 : undefined;
     },
     getPreviousPageParam: () => {
-      return page !== 0 ? page - 1 : undefined;
+      return page - 1 >= 0 ? page - 1 : false;
     },
   });
 
@@ -135,6 +135,10 @@ const Journeys = () => {
           Download a CSV file
         </button>
       )}
+      {journeys.length === 0 &&
+        status === "success" &&
+        filterWords.departure &&
+        filterWords.return && <div>No journeys found with the filter!</div>}
 
       {modalOpen && <FileModal setModalOpen={setModalOpen} />}
 
