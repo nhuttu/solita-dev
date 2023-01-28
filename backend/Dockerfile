@@ -28,7 +28,7 @@ COPY --from=builder --chown=node:node /home/node/build ./build
 
 RUN npm ci --production
 
-CMD [ "node", "build/index.js" ]
+CMD [ "sh", "-c", "npm run start" ]
 
 
 
