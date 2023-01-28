@@ -43,7 +43,7 @@ router.post("/", async (req, res) => {
   try {
     validateJourneyEntry(req.body);
     const journey = await journeyService.createJourney(req.body);
-    res.status(200).send(journey);
+    res.status(201).send(journey);
   } catch (e) {
     console.log(e);
     res.status(400).send({ error: e.message });

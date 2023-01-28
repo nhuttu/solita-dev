@@ -48,7 +48,7 @@ router.post("/", async (req, res) => {
   try {
     validateStationEntry(req.body);
     const station = await stationService.createStation(req.body);
-    res.status(200).send(station);
+    res.status(201).send(station);
   } catch (e) {
     res.status(400).send({ error: e.message });
   }

@@ -68,7 +68,7 @@ describe("Create endpoints test", () => {
     const stationCreate = await api
       .post("/stations")
       .send(newStation)
-      .expect(200)
+      .expect(201)
       .expect("Content-Type", /application\/json/);
 
     const getStation = await api
@@ -120,7 +120,7 @@ describe("Create endpoints test", () => {
     const stationCreate = await api
       .post("/stations")
       .send(newStation)
-      .expect(200)
+      .expect(201)
       .expect("Content-Type", /application\/json/);
 
     await api
