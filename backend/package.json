@@ -6,9 +6,9 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node build/index.js",
     "test": "cross-env NODE_ENV=test jest",
-    "tsc": "tsc",
+    "build": "tsc",
     "dev": " cross-env NODE_ENV=developemnt ts-node-dev index.ts",
-    "start:prod": "npm ci && npm run tsc && npm prune --prodcuction && node build/index.js"
+    "start:prod": "npm ci && npm run build && npm prune --prodcuction && node build/index.js"
   },
   "author": "",
   "license": "ISC",

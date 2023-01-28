@@ -5,10 +5,10 @@ ENV NODE_ENV build
 USER node
 WORKDIR /home/node
 
-COPY package*.json ./
+COPY . .
 RUN npm ci
 
-# RUN npm run test
+RUN npm run test
 
 COPY --chown=node:node . .
 
