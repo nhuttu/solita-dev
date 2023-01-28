@@ -20,25 +20,27 @@ router.get("/:id", async (req, res) => {
   } else {
     const station = (await stationService.findStation(id)) as IStation;
 
-    station.popularDepartures =
-      await stationService.findPopularDepartureStationsForStation(id);
-
-    station.popularReturns =
-      await stationService.findPopularReturnStationsForStation(id);
-
-    station.averageDistanceBegun =
-      await stationService.findAverageDistanceStartingFromStation(id);
-
-    station.averageDistanceEnded =
-      await stationService.findAverageDistanceEndingAtStation(id);
-
-    station.journeysEnded = await stationService.findJourneysStartedCount(id);
-
-    station.journeysEnded = await stationService.findJourneysEndedCount(id);
-
-    if (station) res.status(200).send(station);
-    else
+    if (!station) {
       res.status(404).send({ error: `Station with ID ${id} was not found ` });
+    } else {
+      station.popularDepartures =
+        await stationService.findPopularDepartureStationsForStation(id);
+
+      station.popularReturns =
+        await stationService.findPopularReturnStationsForStation(id);
+
+      station.averageDistanceBegun =
+        await stationService.findAverageDistanceStartingFromStation(id);
+
+      station.averageDistanceEnded =
+        await stationService.findAverageDistanceEndingAtStation(id);
+
+      station.journeysEnded = await stationService.findJourneysStartedCount(id);
+
+      station.journeysEnded = await stationService.findJourneysEndedCount(id);
+
+      res.status(200).send(station);
+    }
   }
 });
 

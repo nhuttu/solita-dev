@@ -1,7 +1,7 @@
 /node_modules
 /build
 **csv
-!/test/data/**.csv
+!/tests/data/**.csv
 /database.*
 /database-dev.*
 /database-test.*

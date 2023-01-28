@@ -6,8 +6,8 @@ export class StationEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  stationID: number;
+  @Column({ nullable: true })
+  stationID?: number;
 
   @Column()
   nameFI: string;

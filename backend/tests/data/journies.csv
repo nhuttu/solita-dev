@@ -1,0 +1,24 @@
+Departure,Return,Departure station id,Departure station name,Return station id,Return station name,Covered distance (m),Duration (sec.)
+2021-06-30T23:59:46,2021-06-30T23:59:55,041,Ympyrätalo,041,Ympyrätalo,0,8
+2021-06-30T23:59:36,2021-07-01T00:06:21,107,Tenholantie,111,Esterinportti,1847,407
+2021-06-30T23:59:34,2021-07-01T00:06:23,009,Erottajan aukio,040,Hakaniemi (M),1602,405
+2021-06-30T23:59:34,2021-07-01T00:08:00,113,Pasilan asema,107,Tenholantie,2277,502
+2021-06-30T23:59:25,2021-07-01T00:22:15,041,Ympyrätalo,011,Unioninkatu,4010,1366
+2021-06-30T23:59:25,2021-07-01T00:14:06,259,Petter Wetterin tie,248,Gunillantie,3555,877
+2021-06-30T23:59:21,2021-07-01T00:24:48,391,Tollinpolku,387,Kauppakeskus Kaari,4337,1526
+2021-06-30T23:59:07,2021-07-01T00:16:00,046,Diakoniapuisto,067,Perämiehenkatu,4265,1008
+2021-06-30T23:59:02,2021-07-01T00:04:05,280,Puotilan ostoskeskus,278,Puotilantie,855,302
+2021-06-30T23:58:54,2021-07-01T00:22:04,072,Eteläinen Hesperiankatu,121,Vilhonvuorenkatu,4627,1385
+2021-06-30T23:58:40,2021-07-01T00:11:06,241,Agronominkatu,391,Tollinpolku,1639,742
+2021-06-30T23:58:37,2021-07-01T00:01:35,035,Cygnaeuksenkatu,162,Leppäsuonaukio,718,175
+2021-06-30T23:58:36,2021-07-01T00:13:49,565,Mankkaanaukio,575,Tontunmäentie,3179,909
+2021-06-30T23:58:33,2021-07-01T00:00:07,393,Malminkartanon asema,391,Tollinpolku,349,90
+2021-06-30T23:58:32,2021-07-01T00:02:30,052,Heikkilänaukio,051,Itälahdenkatu,473,235
+2021-06-30T23:58:22,2021-07-01T00:11:07,505,Westendinasema,401,Koivusaari (M),2967,760
+2021-06-30T23:57:50,2021-07-01T00:46:27,241,Agronominkatu,241,Agronominkatu,8472,2912
+2021-06-30T23:57:45,2021-07-01T00:46:36,241,Agronominkatu,241,Agronominkatu,8772,2931
+2021-06-30T23:57:41,2021-07-01T00:03:53,115,Venttiilikuja,080,Jäähalli,1462,368
+2021-06-30T23:57:39,2021-07-01T00:19:32,015,Ritarikatu,020,Kaisaniemenpuisto,4578,1308
+2021-06-30T23:57:33,2021-07-01T00:04:08,040,Hakaniemi (M),202,Merihaka,1009,393
+2021-06-30T23:57:26,2021-06-30T23:57:33,565,Mankkaanaukio,565,Mankkaanaukio,0,6
+2021-06-30T23:57:23,2021-07-01T00:03:59,281,Puotila (M),328,Lallukankuja,1374,388
