@@ -11,6 +11,4 @@ export const AppDataSource = new DataSource({
   logging: false,
 });
 
-// to initialize initial connection with the database, register all entities
-// and "synchronize" database schema, call "initialize()" method of a newly created database
-// once in your application bootstrap
+// FOR PRODUCTION, DO NOT USE SQLITE
