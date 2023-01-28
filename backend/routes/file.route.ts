@@ -1,4 +1,5 @@
 import express from "express";
+import { unlink } from "fs";
 import multer from "multer";
 import fileService from "../services/file.service";
 
@@ -11,6 +12,10 @@ router.post("/journey", upload.single("file"), async (req, res) => {
     const response = await fileService.uploadJourneyCSVFile(req.file.path);
     if (response) {
       res.status(200).send("File successfully uploaded");
+      unlink(req.file.path, (err) => {
+        if (err) console.log("Error with deletion");
+        else console.log("File deleted");
+      });
     } else {
       res
         .status(400)
@@ -26,6 +31,10 @@ router.post("/station", upload.single("file"), async (req, res) => {
     const response = await fileService.uploadStationCSVFile(req.file.path);
     if (response) {
       res.status(200).send("File successfully uploaded");
+      unlink(req.file.path, (err) => {
+        if (err) console.log("Error with deletion");
+        else console.log("File deleted");
+      });
     } else {
       res
         .status(400)
