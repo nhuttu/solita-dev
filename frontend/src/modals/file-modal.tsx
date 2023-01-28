@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import React, { ChangeEvent, Dispatch, useState } from "react";
+import React, { ChangeEvent, Dispatch, useEffect, useState } from "react";
 import { SetStateAction } from "react";
 import {
   uploadJourneyCSVFile,
@@ -10,6 +10,14 @@ import Alert from "../views/alert";
 interface FileModalProps {
   setModalOpen: Dispatch<SetStateAction<boolean>>;
 }
+
+/**
+ * FileModal is a React functional component that allows the user to upload a CSV file containing journey or station information.
+ * The component is rendered as a modal and contains features such as file selection, file type selection and file upload,
+ * and provides notifications for success or failure of file upload.
+ *
+ * @param {Object} setModalOpen - The setState function required to close the modal
+ */
 
 const FileModal: React.FC<FileModalProps> = ({ setModalOpen }) => {
   const [file, setFile] = useState<File>();
@@ -32,6 +40,14 @@ const FileModal: React.FC<FileModalProps> = ({ setModalOpen }) => {
       setFileType(target);
     }
   };
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
   const handleFileSend = async () => {
     if (file) {
