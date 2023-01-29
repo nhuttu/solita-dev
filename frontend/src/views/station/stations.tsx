@@ -54,7 +54,7 @@ const Stations = () => {
                 className="gap-3 rounded border-2 border-black"
                 onClick={() => setModalOpen(true)}
               >
-                Download a CSV file
+                Upload a CSV file
               </button>
             )}
           </div>

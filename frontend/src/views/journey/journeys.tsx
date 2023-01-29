@@ -26,7 +26,6 @@ const Journeys = () => {
       console.log(e, "Something went wrong with the fetch");
     }
   };
-
   const {
     fetchNextPage,
     error,
@@ -132,7 +131,7 @@ const Journeys = () => {
           className="gap-3 rounded border-2 border-black"
           onClick={() => setModalOpen(true)}
         >
-          Download a CSV file
+          Upload a CSV file
         </button>
       )}
       {journeys.length === 0 &&
