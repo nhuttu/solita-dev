@@ -39,4 +39,7 @@ export interface IStation extends StationEntity {
 
 export type IStationEntry = Omit<IStation, "id">;
 
-export type IJourneyEntry = Omit<IJourney, "id">;
+export type IJourneyEntry = Omit<
+  IJourney,
+  "id" | "departureStation" | "returnStation"
+>;

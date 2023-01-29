@@ -35,7 +35,9 @@ router.get("/:id", async (req, res) => {
       station.averageDistanceEnded =
         await stationService.findAverageDistanceEndingAtStation(id);
 
-      station.journeysEnded = await stationService.findJourneysStartedCount(id);
+      station.journeysStarted = await stationService.findJourneysStartedCount(
+        id
+      );
 
       station.journeysEnded = await stationService.findJourneysEndedCount(id);
 

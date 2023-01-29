@@ -163,6 +163,8 @@ export const assignPropertiesToJourneyEntity = async (
     where: { stationID: Number(line[4]) },
   });
 
+  if (!returnStation || !departureStation) return null;
+
   const newJourney = new JourneyEntity();
   newJourney.departure = line[0];
   newJourney.return = line[1];

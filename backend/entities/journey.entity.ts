@@ -25,6 +25,7 @@ export class JourneyEntity {
 
   // NOTE: make it explicit that the relation is not eager
   // This cascade is questionable, this means all journeys related to StationEntity will be removed too
+  // Which is definitely not ideal from a UX perspective
   @ManyToOne((type) => StationEntity, {
     eager: false,
     nullable: false,

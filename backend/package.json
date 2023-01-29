@@ -5,7 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "start": "cross-env NODE_ENV=production node build/index.js",
-    "test": "cross-env NODE_ENV=test jest",
+    "test": "cross-env NODE_ENV=test jest --runInBand",
     "build": "tsc",
     "dev": " cross-env NODE_ENV=developemnt ts-node-dev index.ts",
     "start:prod": "npm ci && npm run build && npm prune --prodcuction && node build/index.js"

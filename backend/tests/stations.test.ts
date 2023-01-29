@@ -7,7 +7,7 @@ import {
   seedDatabaseWithJournies,
   seedDatabaseWithStations,
 } from "../utils/seed";
-import { IStationEntry } from "../utils/types";
+import { IStation, IStationEntry } from "../utils/types";
 
 const api = supertest(app);
 
@@ -40,7 +40,7 @@ afterAll(async () => {
   await AppDataSource.destroy();
 });
 
-describe("Create endpoints test", () => {
+describe("Station test scenarios", () => {
   test("Station GET works", async () => {
     const stations = await api
       .get("/stations")
@@ -133,4 +133,22 @@ describe("Create endpoints test", () => {
       .expect(404);
     expect(getDeleted.text).toContain("not found");
   }, 25000);
+
+  test("Station journey count, average distance are correct", async () => {
+    const stations = await api.get("/stations");
+
+    const stationToolontulli: IStation = stations.body.find(
+      (station) => station.nameFI === "Töölöntulli"
+    );
+
+    const getStation = await api.get(`/stations/${stationToolontulli.id}`);
+
+    // Manually verified numbers
+    const averageDistanceEnded = (1870 + 665) / 2;
+
+    console.log(getStation.body);
+    expect(getStation.body.journeysStarted).toEqual(2);
+    expect(getStation.body.journeysEnded).toEqual(0);
+    expect(getStation.body.averageDistanceEnded).toEqual(averageDistanceEnded);
+  });
 });
