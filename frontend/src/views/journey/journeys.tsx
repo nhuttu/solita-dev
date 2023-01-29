@@ -136,8 +136,9 @@ const Journeys = () => {
       )}
       {journeys.length === 0 &&
         status === "success" &&
-        filterWords.departure &&
-        filterWords.return && <div>No journeys found with the filter!</div>}
+        (filterWords.departure || filterWords.return) && (
+          <div>No journeys found with the filter!</div>
+        )}
 
       {modalOpen && <FileModal setModalOpen={setModalOpen} />}
 

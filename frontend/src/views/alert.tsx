@@ -15,7 +15,7 @@ const Alert: React.FC<AlertProps> = (props) => {
   useEffect(() => {
     setIsVisible(message !== "");
     if (message !== "") {
-      setTimeout(() => setIsVisible(false), 3000);
+      setTimeout(() => setIsVisible(false), 6500);
     }
   }, [message]);
 
