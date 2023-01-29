@@ -9,9 +9,8 @@ The project consists of two folders: backend and frontend
 
 ## What you need to run the project
 
-Node (my version v16.13.2)
-Optional: Docker (v.20.10.21) and Docker Desktop
-My device: MacBook 
+* Node (my version v16.13.2)
+* Optional: Docker (v.20.10.21) and Docker Desktop
 
 
 ### How to run the program?
