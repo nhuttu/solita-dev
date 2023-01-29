@@ -119,7 +119,12 @@ const FileModal: React.FC<FileModalProps> = ({ setModalOpen }) => {
               onChange={handleFileChange}
             />
             {file && fileType && (
-              <button onClick={() => handleFileSend()}>Send file</button>
+              <button
+                className=" border-2 border-black"
+                onClick={() => handleFileSend()}
+              >
+                Send file
+              </button>
             )}
           </>
         )}

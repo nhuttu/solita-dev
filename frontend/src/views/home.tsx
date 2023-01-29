@@ -23,6 +23,10 @@ const Home = () => {
         <button className="rounder w-28 border border-black">
           <Link to="/journey">Create new journey</Link>
         </button>
+        Want to create a new station?
+        <button className="rounder w-28 border border-black">
+          <Link to="/station">Create new station</Link>
+        </button>
       </div>
     </Fragment>
   );
