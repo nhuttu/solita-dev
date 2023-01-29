@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm run build",
+    "prod:frontend": "serve -s frontend/build",
+    "prod:backend": "node backend/build/index.js",
+    "app": "npm ci && npm run build:frontend && npm run build:backend && concurrently 'npm run prod:frontend' 'npm run prod:backend' "
   },
   "repository": {
     "type": "git",
@@ -17,6 +22,7 @@
   },
   "homepage": "https://github.com/nhuttu/solita-dev#readme",
   "dependencies": {
-    "concurrently": "^7.6.0"
+    "concurrently": "^7.6.0",
+    "serve": "^14.2.0"
   }
 }

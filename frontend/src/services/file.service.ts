@@ -4,7 +4,7 @@ export const uploadJourneyCSVFile = async (file: File) => {
   const formData = new FormData();
   formData.append("file", file);
   const res = await axios.post(
-    "http://localhost:3000/upload/journey",
+    "http://localhost:3003/upload/journey",
     formData,
     {
       headers: {
@@ -20,7 +20,7 @@ export const uploadStationCSVFile = async (file: File) => {
   const formData = new FormData();
   formData.append("file", file);
   const res = await axios.post(
-    "http://localhost:3000/upload/station",
+    "http://localhost:3003/upload/station",
     formData,
     {
       headers: {

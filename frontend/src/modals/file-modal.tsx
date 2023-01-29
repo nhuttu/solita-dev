@@ -60,7 +60,7 @@ const FileModal: React.FC<FileModalProps> = ({ setModalOpen }) => {
         }
         setNotification({
           type: "success",
-          message: "CSV file successfully uploaded!",
+          message: "CSV file successfully uploaded! Please refresh the page!",
         });
         setTimeout(() => setNotification(null), 3000);
         setFile(undefined);

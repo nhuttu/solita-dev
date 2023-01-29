@@ -1,1 +1,9 @@
 /node_modules
+/build
+**csv
+!/tests/data/**.csv
+/database.*
+/database-dev.*
+/database-test.*
+/assets
+/coverage
