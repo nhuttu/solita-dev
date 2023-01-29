@@ -9,7 +9,10 @@
     "build:backend": "cd backend && npm run build",
     "prod:frontend": "serve -s frontend/build",
     "prod:backend": "node backend/build/index.js",
-    "app": "npm ci && npm run build:frontend && npm run build:backend && concurrently 'npm run prod:frontend' 'npm run prod:backend' "
+    "prod:docker": "cd backend && npm run start:docker",
+    "app": "npm ci && npm run build:frontend && npm run build:backend && concurrently \"npm run prod:frontend\" \"npm run prod:backend\" ",
+    "app:docker": "npm ci && npm run build:frontend && npm run build:backend && concurrently \"npm run prod:frontend\" \"npm run prod:docker\" "
+
   },
   "repository": {
     "type": "git",

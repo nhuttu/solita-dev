@@ -62,7 +62,7 @@ export default {
   // globalSetup: undefined,
 
   // A path to a module which exports an async function that is triggered once after all test suites
-  globalTeardown: "./tests/teardown.js",
+  globalTeardown: "./teardown.js",
 
   // A set of global variables that need to be available in all test environments
   // globals: {},
@@ -124,7 +124,7 @@ export default {
   // restoreMocks: false,
 
   // The root directory that Jest should scan for tests and modules within
-  // rootDir: "./test",
+  rootDir: "./tests",
 
   // A list of paths to directories that Jest should use to search for files in
   // roots: [

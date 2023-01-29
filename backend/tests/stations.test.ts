@@ -146,7 +146,6 @@ describe("Station test scenarios", () => {
     // Manually verified numbers
     const averageDistanceEnded = (1870 + 665) / 2;
 
-    console.log(getStation.body);
     expect(getStation.body.journeysStarted).toEqual(2);
     expect(getStation.body.journeysEnded).toEqual(0);
     expect(getStation.body.averageDistanceEnded).toEqual(averageDistanceEnded);

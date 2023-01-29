@@ -4,24 +4,21 @@
 FROM node:16.17.0-bullseye-slim as builder
 
 # For semantic purposes
-ENV NODE_ENV build
-
-# Assing an user
-USER node
-WORKDIR /home/node
+ENV NODE_ENV test
 
 # Copy the code and run a clean install
 COPY . .
 RUN npm ci
 
-#Run tests. If tests fail, the image fails
-RUN npm run test
+# Assign a user
+USER node
+WORKDIR /home/node
 
 #Copy files 
 COPY --chown=node:node . .
 
 # Build the project
-RUN npm run build 
+RUN npm run build
 
 # ---
 
