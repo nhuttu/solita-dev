@@ -5,6 +5,11 @@ import { validateNewStation } from "../../utils/helpers";
 import { IStationEntry } from "../../utils/types";
 import Alert from "../alert";
 
+/**
+ * NewStation is a component for creating a new station
+ *
+ * @returns {JSX.Element}
+ */
 const NewStation = () => {
   const [station, setStation] = useState<IStationEntry>({
     nameFI: "",

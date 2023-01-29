@@ -5,7 +5,13 @@ import JourneyRow from "./journey-row";
 interface JourneysProps {
   journeys: IJourney[];
 }
-
+/**
+ * JourneyTable is a component that renders a JourneyTable
+ *
+ * @param journeys Props include journeys array
+ *
+ * @returns {JSX.Element} Returns a JSX element
+ */
 const JourneyTable: React.FC<JourneysProps> = ({ journeys }) => {
   return (
     <table className="mb-5 min-w-full table-auto border-collapse items-center justify-center">

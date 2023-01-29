@@ -7,7 +7,7 @@ interface StationsProps {
 }
 
 /**
- * StationTable is a functional react component that renders a table of station data.
+ * StationTable is a component that renders a table of station data.
  *
  * @param {IStation[]} stations - An array of IStation objects representing the station data to be displayed in the table.
  *

@@ -5,6 +5,13 @@ interface JourneyProps {
   journey: IJourney;
 }
 
+/**
+ * JourneyRow is a component that renders a single Journey row
+ *
+ * @param Journey Props include a single journey
+ *
+ * @returns {JSX.Element} Returns a JSX element
+ */
 const JourneyRow: React.FC<JourneyProps> = ({ journey }) => {
   return (
     <>

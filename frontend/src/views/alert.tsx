@@ -7,6 +7,13 @@ interface AlertProps {
   };
 }
 
+/**
+ * Alert is a component that renders a notification on the bottom right of the screen
+ *
+ * @param props A notification object that includes a message and a type (error/success)
+ *
+ * @returns {JSX.Element} Returns a JSX.Element
+ */
 const Alert: React.FC<AlertProps> = (props) => {
   const [isVisible, setIsVisible] = useState(false);
 

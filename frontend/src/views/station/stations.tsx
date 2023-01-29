@@ -6,6 +6,11 @@ import { fetchStations } from "../../services/station.service";
 import { IStation } from "../../utils/types";
 import StationTable from "./station-table";
 
+/**
+ * Stations component is responsible for rendering all stations
+ *
+ * @returns JSX.Element
+ */
 const Stations = () => {
   const { data, error, isFetching, status } = useQuery<
     IStation[] | undefined,

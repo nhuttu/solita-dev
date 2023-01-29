@@ -6,7 +6,12 @@ import { validateNewJourney } from "../../utils/helpers";
 import { IJourney, IJourneyEntry } from "../../utils/types";
 import Alert from "../alert";
 
-const NewJourney = () => {
+/**
+ * NewJourney is a component for creating a new journey
+ *
+ * @returns {JSX.Element} Returns a JSX.element
+ */
+const NewJourney = (): JSX.Element => {
   const [journey, setJourney] = useState<IJourneyEntry>({
     return: "",
     departure: "",

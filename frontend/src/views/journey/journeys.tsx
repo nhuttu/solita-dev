@@ -8,7 +8,12 @@ import JourneyTable from "./journey-table";
 
 let timeout: any;
 
-const Journeys = () => {
+/**
+ * Journeys is a component that renders all the journeys available
+ *
+ * @returns {JSX.Element} Returns a JSX.Element
+ */
+const Journeys = (): JSX.Element => {
   const [page, setPage] = useState(0);
   const [journeys, setJourneys] = useState<IJourney[]>([]);
   const [modalOpen, setModalOpen] = useState(false);

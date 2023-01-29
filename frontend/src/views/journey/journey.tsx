@@ -8,6 +8,11 @@ import {
 import { IJourney } from "../../utils/types";
 import Alert from "../alert";
 
+/**
+ * Journey is a component that is meant to view information of a single Journey
+ *
+ * @returns {JSX.Element} Returns a JSX element that displays information of a single Journey
+ */
 const Journey = () => {
   const { id } = useParams();
 

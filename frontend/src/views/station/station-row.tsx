@@ -5,6 +5,12 @@ interface StationProps {
   station: IStation;
 }
 
+/**
+ * StationRow is responsible for rendering a single station row
+ *
+ * @param station A single station as a parameter
+ * @returns JSX.Element
+ */
 const StationRow: React.FC<StationProps> = ({ station }) => {
   return (
     <>

@@ -9,6 +9,11 @@ import {
 } from "../../services/station.service";
 import { IStation } from "../../utils/types";
 import Alert from "../alert";
+/**
+ * Station component is for viewing an existin station
+ *
+ * @returns JSX.Element
+ */
 
 const Station = () => {
   const { id } = useParams();
