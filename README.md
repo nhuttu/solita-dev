@@ -11,7 +11,7 @@ The project consists of two folders: backend and frontend
 
 Node (my version v16.13.2)
 Optional: Docker (v.20.10.21) and Docker Desktop
-My device: MacBook
+My device: MacBook 
 
 
 ### How to run the program?
@@ -27,14 +27,13 @@ The command will install dependecies needed, build the files, and then host them
 
 The latter command will do the same, but the backend is ran in a docker image. The command will run the backend with the command
 ```docker compose up``` which will build the image from the Dockerfile in backend and host it. For this you need to have Docker installed and 
-Docker Desktop running.
+Docker running.
 
 ## Frontend
 
 Frontend is built with React v18 and TypeScript.
 
-For API calls, React Query is used. For styling, TailwindCSS was used. This was my first time using both.
-React Query was positive, but TailwindCSS leaves me mixed feelings.
+For API calls, React Query is used. For styling, TailwindCSS was used. 
 
 App was built with React Router.
 
